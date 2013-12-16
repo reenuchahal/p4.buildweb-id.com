@@ -76,6 +76,15 @@ class users_controller extends base_controller {
 			# Insert all $_POST Info to database-> users table
 			DB::instance(DB_NAME)->insert('users', $_POST);
 			
+			# Build the Query
+			$q = "SELECT token
+			FROM users
+			WHERE email = '".$_POST['email']."'
+			";
+			
+			# Find Match
+			$token = DB::instance(DB_NAME)->select_field($q);
+			
 			# Set to, from, subject and body for a Welcome Email
 			$to[]    = Array("name" => $_POST['first_name'], "email" => $_POST['email']);
 			$from    = Array("name" => APP_NAME, "email" => APP_EMAIL);
