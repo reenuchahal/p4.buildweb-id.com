@@ -85,16 +85,20 @@ class users_controller extends base_controller {
 			# Find Match
 			$token = DB::instance(DB_NAME)->select_field($q);
 			
+			
+			
 			# Set to, from, subject and body for a Welcome Email
 			$to[]    = Array("name" => $_POST['first_name'], "email" => $_POST['email']);
 			$from    = Array("name" => APP_NAME, "email" => APP_EMAIL);
 			$subject = "Welcome!!! You have signed up for Web BookMark";
 			$body = View::instance('v_users_email_welcome');
-			
+			$body->token = $token;
 			# Send Welcome email
 			$email = Email::send($to, $from, $subject, $body, true, '');
 			
+			
 			# Route to login Page
+			//echo $token;
 			Router::redirect("/users/login/");
 		}
 	}
