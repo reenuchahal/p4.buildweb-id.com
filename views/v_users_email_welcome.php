@@ -3,16 +3,18 @@
 	<h3>Hello <?=$_POST['first_name'];?> <?=$_POST['last_name'];?>,</h3>
 	<p> 
 		Thank you for signing up at ChitChat. Your may login to 
-		<a href="http://p2.buildweb-id.com/users/login/">ChitChat</a> 
+		<a href="http://p4.buildweb-id.com/users/login/">Web BooKMark</a> 
 		Using the following email:
 		<br/><br/>
-		
+		Click on this link to activate your account:<br/>
+		<a href="http://p4.buildweb-id.com/users/verify/email='.<?=$_POST['email'];?>.'&token='.$_POST['token'].'">http://p4.buildweb-id.com/users/verify/email='.<?=$_POST['email'];?>.'&token='.$_POST['token'].'</a>
+		<a href="http://p4.buildweb-id.com/users/verify/token='.$_POST['token'].'">http://p4.buildweb-id.com/users/verify/token='.$_POST['token'].'</a>
 		Email: <?=$_POST['email'];?>
 		<br/><br/>
 	
-		Have a Great ChitChat with your friends.
+		Have a Great Web BookMark with your friends.
 		<br/><br/><br/>
 	
-		~ ChitChat Team
+		~ Web BookMark Team
 	</p>
 </div> <!-- / div -->

@@ -79,7 +79,7 @@ class users_controller extends base_controller {
 			# Set to, from, subject and body for a Welcome Email
 			$to[]    = Array("name" => $_POST['first_name'], "email" => $_POST['email']);
 			$from    = Array("name" => APP_NAME, "email" => APP_EMAIL);
-			$subject = "Welcome!!! You have signed up for ChitChat";
+			$subject = "Welcome!!! You have signed up for Web BookMark";
 			$body = View::instance('v_users_email_welcome');
 			
 			# Send Welcome email
