@@ -102,6 +102,29 @@ class users_controller extends base_controller {
 			Router::redirect("/users/login/");
 		}
 	}
+	public function verify($token = NULL ) {
+	
+	if($token == NULL) {
+        echo "No token specified";
+    }
+    else {
+    	
+    	# Build a Query
+			$q = "UPDATE users
+				SET active = 1
+				WHERE token = '".$token."'
+				";
+				
+			# Run the command
+			DB::instance(DB_NAME)->query($q);
+			
+			
+			# Route to profile page
+			Router::redirect("/users/login/");
+     }
+    
+	}
+	
 	
 	public function login($error = NULL) {
 		
@@ -148,6 +171,7 @@ class users_controller extends base_controller {
 			FROM users
 			WHERE email = '".$_POST['email']."' 
 			AND password = '".$_POST['password']."'
+			AND active = 1		
 			";
 		
 		# Find Match
