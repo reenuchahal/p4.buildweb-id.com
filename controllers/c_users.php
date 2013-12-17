@@ -109,7 +109,7 @@ class users_controller extends base_controller {
     }
     else {
     	# Build the Query
-    	$q = "SELECT token, email, active
+    	$q = "SELECT *
 			FROM users
 			WHERE email = '".$email."'
     		AND token = '".$token."'
@@ -135,6 +135,9 @@ class users_controller extends base_controller {
 			# Route to profile page
 			Router::redirect("/users/login/");
     	} else {
+    		echo $email;
+    		echo "<br/>";
+    		echo $token;
     		echo "The url is either invalid or you already have activated your account.";
     	}
      }
