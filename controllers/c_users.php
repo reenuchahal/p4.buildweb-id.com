@@ -103,6 +103,7 @@ class users_controller extends base_controller {
 	}
 	
 	public function signup_result($error1 = NULL, $error2 = NULL) {
+		
 		# If user is logged in; redirect it to the Profile page
 		if($this->user) {
 		
@@ -115,13 +116,13 @@ class users_controller extends base_controller {
 		
 		# Set Page Title
 		$this->template->title = "Verification";
-
+		
 		# Pass error data to the view
 		$this->template->content->error1 = $error1;
 		
 		# Pass error data to the view
 		$this->template->content->error2 = $error2;
-
+		
 		# Render View
 		echo $this->template;
 	}

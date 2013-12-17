@@ -1,9 +1,9 @@
 <?php if(isset($loginMessage) & !isset($error)): ?>
-<div class="row">
-	<div class="col-md-offset-1 col-xs-12 col-sm-12 col-md-10 bs-callout-success">
-		<h4> You have been registered to website successfully. Please Login.</h4>
-	</div>
-</div><br/>
+	<div class="row">
+		<div class="col-md-offset-1 col-xs-12 col-sm-12 col-md-10 bs-callout-success">
+			<h4> You have been registered to website successfully. Please Login.</h4>
+		</div>
+	</div><br/>
 <?php endif; ?>
 <div class="row">
 	<form  method="POST" action="/users/p_login">
