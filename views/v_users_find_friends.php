@@ -2,7 +2,7 @@
 	<div class="col-md-offset-2 col-sm-offset-2 col-xs-12 col-sm-8 col-md-8">
 		
 		<h1>Find a Connection <br/> 
-			<small><?=$user->first_name;?> <?=$user->last_name;?> (<?php echo (count($connections)-1);?>)</small>
+			<small><?=$user->first_name;?> <?=$user->last_name;?> (<?php echo (count($connections));?>)</small>
 		</h1>
 		
 		<table class="table table-hover">
