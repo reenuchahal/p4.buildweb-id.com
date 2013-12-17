@@ -105,14 +105,25 @@ class users_controller extends base_controller {
 	public function verify($token = NULL ) {
 	
 	if($token == NULL) {
-        echo "No token specified";
+        echo "Invalid approach, please use the link that has been send to your email.</div>';  ";
     }
     else {
+    	# Build the Query
+    	$q = "SELECT token, email, active
+			FROM users
+			WHERE token = '".$token."'
+			AND active = 0
+			";
+    		
+    	# Find Match
+    	$match = DB::instance(DB_NAME)->select_field($q);
     	
+    	if($match > 0){ 
     	# Build a Query
 			$q = "UPDATE users
 				SET active = 1
 				WHERE token = '".$token."'
+				AND active = 0
 				";
 				
 			# Run the command
@@ -121,6 +132,9 @@ class users_controller extends base_controller {
 			
 			# Route to profile page
 			Router::redirect("/users/login/");
+    	} else {
+    		echo "The url is either invalid or you already have activated your account.";
+    	}
      }
     
 	}
