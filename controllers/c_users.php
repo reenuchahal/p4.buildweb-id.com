@@ -98,54 +98,81 @@ class users_controller extends base_controller {
 			
 			
 			# Route to login Page
-			//echo $token;
-			Router::redirect("/users/login/");
+			Router::redirect("/users/signup_result/");
 		}
 	}
-	public function verify($email= NULL,$token = NULL ) {
+	
+	public function signup_result($error1 = NULL, $error2 = NULL) {
+		# If user is logged in; redirect it to the Profile page
+		if($this->user) {
 		
-	if(($email == NULL) || ($token == NULL)) {
-        echo "Invalid approach, please use the link that has been send to your email";
-    }
-    else {
-    	# Build the Query
-    	$q = "SELECT *
-			FROM users
-			WHERE email = '".$email."'
-    		AND token = '".$token."'
-			AND active = 0
-			";
-    		
-    	# Find Match
-    	$match = DB::instance(DB_NAME)->select_field($q);
-    	
-    	if($match > 0){ 
-    	# Build a Query
-			$q = "UPDATE users
-				SET active = 1
+			# Route to Profile page
+			Router::redirect('/users/profile');
+		}
+		
+		# Set View
+		$this->template->content = View::instance('v_users_verify');
+		
+		# Set Page Title
+		$this->template->title = "Verification";
+
+		# Pass error data to the view
+		$this->template->content->error1 = $error1;
+		
+		# Pass error data to the view
+		$this->template->content->error2 = $error2;
+
+		# Render View
+		echo $this->template;
+	}
+	
+	public function verify($email= NULL,$token = NULL ) {
+			
+		if(($email == NULL) || ($token == NULL)) {
+				
+			# Route to login Page
+			Router::redirect("/users/signup_result/error1");
+				
+		} else {
+			# Build the Query
+			$q = "SELECT *
+				FROM users
 				WHERE email = '".$email."'
 				AND token = '".$token."'
 				AND active = 0
 				";
+		    		
+			# Find Match
+			$match = DB::instance(DB_NAME)->select_field($q);
+		    	
+			if($match > 0) { 
 				
-			# Run the command
-			DB::instance(DB_NAME)->query($q);
-			
-			
-			# Route to profile page
-			Router::redirect("/users/login/");
-    	} else {
-    		echo $email;
-    		echo "<br/>";
-    		echo $token;
-    		echo "The url is either invalid or you already have activated your account.";
-    	}
-     }
-    
+				# Build a Query
+				$q = "UPDATE users
+					SET active = 1
+					WHERE email = '".$email."'
+					AND token = '".$token."'
+					AND active = 0
+					";
+							
+				# Run the command
+				DB::instance(DB_NAME)->query($q);
+						
+						
+				# Route to profile page
+				Router::redirect("/users/login/loginMessage");
+				
+			} else {
+			    		
+				# Route to login Page
+				Router::redirect("/users/signup_result/match/error");
+						
+			}
+		}
 	}
 	
 	
-	public function login($error = NULL) {
+	public function login($loginMessage = NULL, $error = NULL ) {
 		
 		# If user is logged in; redirect it to the Profile page
 		if($this->user) {
@@ -157,8 +184,12 @@ class users_controller extends base_controller {
 		# Set View
 		$this->template->content = View::instance('v_users_login');
 		
+		#Set SuccessMessage
+		$this->template->content->loginMessage = $loginMessage;
+		
 		# Set Error
 		$this->template->content->error = $error;
+		
 		
 		# Set Title
 		$this->template->title = "Login";
@@ -175,7 +206,7 @@ class users_controller extends base_controller {
 		($_POST['password'] == NULL )){
 		
 			# Show error
-			Router::redirect("/users/login/error");
+			Router::redirect("/users/login/loginMessage/error");
 		}
 		
 		# Sanitize the user entered data
@@ -200,7 +231,7 @@ class users_controller extends base_controller {
 		if(!$token){
            
 			# Send them back to the login page
-			Router::redirect("/users/login/error");
+			Router::redirect("/users/login/loginMessage/error");
 
 		# if we found the Match, login succeeded!
 		} else {

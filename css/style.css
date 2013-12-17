@@ -33,6 +33,46 @@ input, table {
 	margin-left:20px;
 }
 
+/* Variations */
+.bs-callout-danger {
+	background-color: #fdf7f7;
+	border-color: #eed3d7;
+}
+
+.bs-callout-danger h4 {
+	color: #b94a48;
+	line-height:30px;
+}
+
+.bs-callout-warning {
+	background-color: #faf8f0;
+	border-color: #faebcc;
+}
+
+.bs-callout-warning h4 {
+	color: #8a6d3b;
+	line-height:30px;
+}
+
+.bs-callout-success {
+	background-color: #dff0d8;
+	border-color: #d6e9c6;
+}
+
+.bs-callout-success h4 {
+	color: #468847;
+	line-height:30px;
+}
+
+.bs-callout-info {
+	background-color: #f4f8fa;
+	border-color: #bce8f1;
+}
+
+.bs-callout-info h4 {
+	color: #34789a;
+}
+
 .container {
 	min-height:450px;
 	margin-top: 100px;
