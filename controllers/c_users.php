@@ -102,16 +102,17 @@ class users_controller extends base_controller {
 			Router::redirect("/users/login/");
 		}
 	}
-	public function verify($token = NULL ) {
-	
-	if($token == NULL) {
-        echo "Invalid approach, please use the link that has been send to your email.</div>';  ";
+	public function verify($email= NULL,$token = NULL ) {
+		
+	if(($email == NULL) || ($token == NULL)) {
+        echo "Invalid approach, please use the link that has been send to your email";
     }
     else {
     	# Build the Query
     	$q = "SELECT token, email, active
 			FROM users
-			WHERE token = '".$token."'
+			WHERE email = '".$email."'
+    		AND token = '".$token."'
 			AND active = 0
 			";
     		
@@ -122,7 +123,8 @@ class users_controller extends base_controller {
     	# Build a Query
 			$q = "UPDATE users
 				SET active = 1
-				WHERE token = '".$token."'
+				WHERE email = '".$email."'
+				AND token = '".$token."'
 				AND active = 0
 				";
 				

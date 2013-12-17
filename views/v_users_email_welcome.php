@@ -9,7 +9,7 @@
 		Using the following email:
 		<br/><br/>
 		Click on this link to activate your account:<br/>
-		<a href="http://p4.buildweb-id.com/users/verify/<?=$token?>">http://p4.buildweb-id.com/users/verify/<?=$token?></a>
+		<a href="http://p4.buildweb-id.com/users/verify/<?=$_POST['email'];?>/<?=$token?>">http://p4.buildweb-id.com/users/verify/<?=$_POST['email'];?>/<?=$token?></a>
 		Email: <?=$_POST['email'];?>
 		<br/><br/>
 	
