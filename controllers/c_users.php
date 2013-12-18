@@ -173,7 +173,7 @@ class users_controller extends base_controller {
 	}
 	
 	
-	public function login($loginMessage = NULL, $error = NULL ) {
+	public function login ($loginMessage = NULL, $error = NULL ) {
 		
 		# If user is logged in; redirect it to the Profile page
 		if($this->user) {
@@ -246,6 +246,182 @@ class users_controller extends base_controller {
 		}
 	}
 	
+	public function forgot_password($error = NULL, $email = NULL) {
+	
+		# If user is logged in; redirect it to the Profile page
+		if($this->user) {
+	
+		# Route to Profile page
+			Router::redirect('/users/profile');
+		}
+	
+			# Set View
+			$this->template->content = View::instance('v_users_forgot_password');
+			
+			#Set Error
+			$this->template->content->error = $error;
+			
+			#Set Error
+			$this->template->content->email = $email;
+			
+			# Set Title
+			$this->template->title = "Forgot password?";
+
+			# Render View
+			echo $this->template;
+	}
+	
+	
+	public function p_forgot_password() {
+		
+		# Sanitize the user entered data
+		$_POST = DB::instance(DB_NAME)->sanitize($_POST);
+		
+		# Search the db for this email and password
+		# Retrieve the token if it's available
+		$q = "SELECT token
+			FROM users
+			WHERE email = '".$_POST['email']."'
+			";
+		
+		# Find Match
+		$token = DB::instance(DB_NAME)->select_field($q);
+		
+		# If we didn't find a matching token in the database, it means login failed
+		if(!$token){
+			 
+			# Send them back to the login page
+			Router::redirect("/users/forgot_password/error/".$_POST['email']);
+
+		# if we found the Match, do this
+		} else {
+			
+			# Build a Query
+			$q = "UPDATE users
+					SET active = 0
+					WHERE email = '".$_POST['email']."'
+					AND token = '".$token."'
+					";
+				
+			# Run the command
+			DB::instance(DB_NAME)->query($q);
+			
+			# Set to, from, subject and body for a Welcome Email
+			$to[]    = Array("name" => $_POST['email'], "email" => $_POST['email']);
+			$from    = Array("name" => APP_NAME, "email" => APP_EMAIL);
+			$subject = "Forgot your password? Web BookMark";
+			$body = View::instance('v_users_email_recover_password');
+			$body->token = $token;
+			# Send Welcome email
+			$email = Email::send($to, $from, $subject, $body, true, '');
+				
+				
+			# Route to login Page
+			Router::redirect("/users/recover_password_result/");
+		}
+		
+	}
+	
+	public function recover_password_result($success= NULL, $error1 = NULL, $error2 = NULL) {
+	
+		# If user is logged in; redirect it to the Profile page
+		if($this->user) {
+	
+		# Route to Profile page
+			Router::redirect('/users/profile');
+		}
+	
+			# Set View
+			$this->template->content = View::instance('v_users_recovery');
+
+			# Set Page Title
+			$this->template->title = "Recover Password";
+			
+			# Pass error data to the view
+			$this->template->content->success = $success;
+
+			# Pass error data to the view
+			$this->template->content->error1 = $error1;
+
+			# Pass error data to the view
+			$this->template->content->error2 = $error2;
+
+			# Render View
+			echo $this->template;
+	}
+	
+	public function reset_password($email = NULL, $token = NULL) {
+	
+		# If user is logged in; redirect it to the Profile page
+		if($this->user) {
+	
+		# Route to Profile page
+		Router::redirect('/users/profile');
+		}
+	
+		# Set View
+		$this->template->content = View::instance('v_reset_password');
+	
+			# Set Page Title
+		$this->template->title = "Recover Password";
+	
+			# Pass error data to the view
+		$this->template->content->email = $email;
+	
+		# Pass error data to the view
+		$this->template->content->token = $token;
+	
+		# Render View
+		echo $this->template;
+	}
+	public function p_reset_password(){
+		
+			# Build the Query
+				$q = "SELECT count(user_id)
+				FROM users
+				WHERE email = '".$_POST['email']."'
+				AND token = '".$_POST['token']."'
+				AND active = 0
+				";
+		
+			# Find Match
+				$match = DB::instance(DB_NAME)->select_field($q);
+				
+				 
+			if($match > 0) {
+			# Sanitize the user entered data
+			$_POST = DB::instance(DB_NAME)->sanitize($_POST);
+			
+			#Hash submitted password so we can compare it against one in the db
+			$_POST['password'] = sha1(PASSWORD_SALT.$_POST['password']);
+			
+			
+			# Build a Query
+			$q = "UPDATE users
+						SET password =  '".$_POST['password']."',
+						active = 1
+						WHERE email = '".$_POST['email']."'
+						AND token = '".$_POST['token']."'
+						AND active = 0
+						";
+				
+			# Run the command
+			DB::instance(DB_NAME)->query($q);
+			
+			# Route to profile page
+			Router::redirect("/users/recover_password_result/success");
+	    } else {
+						
+					# Route to login Page
+					Router::redirect("/users/recover_password_result/result/match/error");
+			}	
+	    
+		
+		
+	}
+	
+	
+	
 	public function logout() {
 	
 	    # Generate and save a new token for next login
@@ -265,7 +441,7 @@ class users_controller extends base_controller {
 	    Router::redirect("/");
 	}
 	
-	public function profile($error = NULL) {
+	public function profile($error = NULL, $unique_email_error = null) {
 		
 		# If user is not logged in; redirect it to the login page
 		if(!$this->user) {
@@ -283,6 +459,9 @@ class users_controller extends base_controller {
 		# Set Error
 		$this->template->content->error = $error;
 		
+		# Set Error
+		$this->template->content->unique_email_error = $unique_email_error;
+		
 		# Get IP addres
 		$ip= Geolocate::ip_address();
 		
@@ -291,6 +470,74 @@ class users_controller extends base_controller {
 		
 		# Render View
 		echo $this->template;
+	}
+	
+	public function p_profileEdit(){
+		
+		# If user is not logged in; redirect it to the login page
+		if(!$this->user) {
+				
+			# If user is not logged in, route to login page
+			Router::redirect('/users/login');
+		} else {
+			
+			# Retrieve the token if it's available
+			$q = "SELECT count(email)
+			FROM users
+			WHERE email = '".$_POST['email']."'
+			";
+			
+			# Find Match
+			$all_match = DB::instance(DB_NAME)->select_field($q);
+			
+			# Retrieve the token if it's available
+			$q = "SELECT count(email)
+			FROM users
+			WHERE email = '".$_POST['email']."'
+			AND user_id = '".$this->user->user_id."'
+			";
+			
+			# Find Match
+			$user_match = DB::instance(DB_NAME)->select_field($q);
+			
+			if ($all_match - $user_match < 1) {
+				
+				# Sanitize the user entered data
+				$_POST = DB::instance(DB_NAME)->sanitize($_POST);
+				
+				#Time Modified
+				$_POST['modified'] = Time::now();
+					
+				# Encrypt the password
+				$_POST['password'] = sha1(PASSWORD_SALT.$_POST['password']);
+			
+				# Build a Query
+				$q = "UPDATE users
+						SET first_name =  '".$_POST['first_name']."',
+						last_name =  '".$_POST['last_name']."',
+						password =  '".$_POST['password']."',
+						email = '".$_POST['email']."',
+						modified = '".$_POST['modified']."'
+						WHERE user_id = '".$this->user->user_id."'
+						";
+					
+				# Run the command
+				DB::instance(DB_NAME)->query($q);
+				
+				
+				# Route to profile page
+				Router::redirect("/users/profile");
+				
+			} else {
+				
+				# Route to profile page
+				Router::redirect("/users/profile/error/unique_email/");
+				
+			} 
+			
+		}
+		
+		
 	}
 	
 	public function p_profile() {

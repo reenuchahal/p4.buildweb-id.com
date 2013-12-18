@@ -35,8 +35,7 @@
 			<!-- If there is an error, Show this message -->
 			<?php if(isset($error)): ?>
 				<p class="error">
-					Either you did not fill up the full form.<br/>
-					OR You already have an account on Web BookMark. <a href="/users/login">Login here</a>
+					You already have an account on Web BookMark. <a href="/users/login">Login here</a>
 				</p>
 			<?php endif; ?>
     	

@@ -23,7 +23,8 @@
 				<p class="error"> Login failed. <br/>Please double check your email and password.</p>
 			<?php endif; ?>
 			
-			<button type="submit" class="btn btn-default">Log in</button>
+			<button type="submit" class="btn btn-default">Log in</button> 
+			<a class="pull-right" href="/users/forgot_password">Forgot your password?</a>
 		</div><!-- /.col-md-offset-1 .col-xs-8 .col-sm-6 .col-md-4 -->
 	</form>
 </div><!-- / .row -->

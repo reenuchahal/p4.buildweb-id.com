@@ -1,10 +1,3 @@
-/***************************/
-//@Author: Adrian "yEnS" Mato Gondelle & Ivan Guardado Castro
-//@website: www.yensdesign.com
-//@email: yensamg@gmail.com
-//@license: Feel free to use it, but keep this credits please!					
-/***************************/
-
 $(document).ready(function(){
 	//global vars
 	var form = $("#registrationForm");
@@ -153,4 +146,16 @@ $(document).ready(function(){
 		}
 	}*/
 	
+});
+
+$("#profileEdit").click(function() {
+	$("#profileInfoEdit").removeClass("hidden").addClass("show");
+	$("#profileInfo").removeClass("show").addClass("hidden");
+	$("#profileEdit").removeClass("show").addClass("hidden");
+});
+
+$("#profileEditCancel").click(function() {
+	$("#profileInfoEdit").removeClass("show").addClass("hidden");
+	$("#profileInfo").removeClass("hidden").addClass("show");
+	$("#profileEdit").removeClass("hidden").addClass("show");
 });
