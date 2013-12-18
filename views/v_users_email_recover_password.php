@@ -5,7 +5,7 @@
 	
 	<p> 
 		Click on this link to reset your password<br/>
-		<a href="http://p4.buildweb-id.com/users/reset_password/<?=$_POST['email'];?>/<?=$token?>">http://p4.buildweb-id.com/users/recover_password/<?=$_POST['email'];?>/<?=$token?></a>
+		<a href="http://p4.buildweb-id.com/users/reset_password/<?=$_POST['email'];?>/<?=$token?>">http://p4.buildweb-id.com/users/reset_password/<?=$_POST['email'];?>/<?=$token?></a>
 		
 		<br/><br/>
 	
