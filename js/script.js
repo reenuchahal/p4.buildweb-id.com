@@ -1,6 +1,8 @@
 $(document).ready(function(){
 	//global vars
 	var form = $("#registrationForm");
+	var form_password = $("#formPassword");
+	var form_login = $("#forgotPasswordLogin");
 	var firstName = $("#firstName");
 	var lastName = $("#lastName");
 	var firstNameInfo = $("#firstNameInfo");
@@ -30,6 +32,22 @@ $(document).ready(function(){
 	//On Submitting
 	form.submit(function(){
 		if(validateFirstName() & validateLastName() & validateYourEmail() & validateYourPassword())
+			return true
+		else
+			return false;
+	});
+	
+	//On Submitting
+	form_password.submit(function(){
+		if(validateYourPassword())
+			return true
+		else
+			return false;
+	});
+	
+	//On Submitting
+	form_login.submit(function(){
+		if(validateYourEmail())
 			return true
 		else
 			return false;

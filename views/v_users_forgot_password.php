@@ -1,5 +1,5 @@
 <div class="row">
-	<form  method="POST" action="/users/p_forgot_password">
+	<form  method="POST" action="/users/p_forgot_password/" id="forgotPasswordLogin">
 		
 		<div class="col-md-offset-1 col-xs-12 col-sm-12 col-md-10">
 		<h3>Forgot Your Password?</h3>
@@ -15,7 +15,7 @@
 					<p class="error">This email is not registered to the Web BookMark.</p>
 				<?php endif; ?>
 			
-			<button type="submit" class="btn btn-default" id="signUP">Get Password</button>
+			<button type="submit" class="btn btn-default">Get Password</button>
 			
 		</div><!-- /.col-md-offset-1 .col-xs-8 .col-sm-6 .col-md-4 -->
 	</form>

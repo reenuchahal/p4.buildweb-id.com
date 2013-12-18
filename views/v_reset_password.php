@@ -1,5 +1,5 @@
 <div class="row">
-	<form  method="POST" action="/users/p_reset_password">
+	<form  method="POST" action="/users/p_reset_password/" id="formPassword">
 		
 		<div class="col-md-offset-1 col-xs-12 col-sm-6 col-md-6">
 			
