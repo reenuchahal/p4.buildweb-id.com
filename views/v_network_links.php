@@ -19,7 +19,7 @@
 				<p>+<a href="/users/findfriends"> Add New Connection</a></p>
 			</div>
 			<div class="pull-left">
-			<p><a href="/network/links">Show all</a></p>
+				<p><a href="/network/links">Show all</a></p>
 			</div>
 		<?php endif; ?>
 		<br/>
