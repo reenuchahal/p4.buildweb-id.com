@@ -4,7 +4,7 @@
 	<?=$_POST['email'];?>
 	
 	<p> 
-		Thank you for signing up at ChitChat. Your may login to 
+		Thank you for signing up at Web BookMark. Your may login to 
 		<a href="http://p4.buildweb-id.com/users/login/">Web BooKMark</a> 
 		Using the following email:
 		<br/><br/>

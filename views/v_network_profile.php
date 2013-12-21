@@ -30,6 +30,7 @@
 					<p><a href="/users/findfriends"> &#171; Go back to Connections</a></p>
 				</div>
 				<?php if(!isset($_POST['search'])): ?>
+					<br/><br/>
 					<h4>No link added</h4>
 					<blockquote>
 						<p>There's no activity in <?=$profile[$email]['first_name'];?>'s  account.</p>
@@ -42,7 +43,7 @@
 					<blockquote>
 						<p>Refine your search. 
 							TIPS: Use key words to search. 
-							You can search by connection's first Name, Last Name, Title, link description.</p>
+							You can search by Link's Title, URL or Description.</p>
 					</blockquote>
 				<?php endif; ?>
 			</div>	

@@ -52,7 +52,7 @@
 					<blockquote>
 						<p>Refine your search. 
 							TIPS: Use key words to search. 
-							You can search by connection's  Title, URL or link description.</p>
+							You can search by Link's Title, URL or Description.</p>
 					</blockquote>
 				</div>
 			<?php endif; ?>
