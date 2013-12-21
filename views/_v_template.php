@@ -41,17 +41,25 @@
 		
 			<!-- Collect the nav links, forms, and other content for toggling -->
 			<div class="collapse navbar-collapse navbar-ex1-collapse">
-				<ul class="nav navbar-nav">
-					<li <?php if((basename($_SERVER['REQUEST_URI']) == NULL) || (basename($_SERVER['REQUEST_URI']) == 'index') ||(basename($_SERVER['REQUEST_URI']) == 'index.php') ): ?> class="active" <?php endif; ?>>
-						<a href='/'>Home</a>
-					</li>
-				</ul>
+				<?php if(!$user): ?>
+					<ul class="nav navbar-nav">
+						<li <?php if((basename($_SERVER['REQUEST_URI']) == NULL) || (basename($_SERVER['REQUEST_URI']) == 'index') ||(basename($_SERVER['REQUEST_URI']) == 'index.php') ): ?> class="active" <?php endif; ?>>
+							<a href='/'>Home</a>
+						</li>
+					</ul>
+				<?php endif; ?>
 				<ul class="nav navbar-nav navbar-right">
 					<?php if($user): ?>
-						<li<?php if((basename($_SERVER['REQUEST_URI']) == 'add') || (basename($_SERVER['REQUEST_URI']) == 'edit')): ?> class="active" <?php endif; ?>>
-							<a href='/posts/add'>News Feed</a>
+						<li<?php if(basename($_SERVER['REQUEST_URI']) == 'links'): ?> class="active" <?php endif; ?>>
+							<a href='/network/links'>My Network</a>
 						</li>
-						<li<?php if(basename($_SERVER['REQUEST_URI']) == 'findfriends'): ?> class="active" <?php endif; ?>>
+						<li<?php if(basename($_SERVER['REQUEST_URI']) == 'myLinks'): ?> class="active" <?php endif; ?>>
+							<a href='/bookmarks/myLinks'>My Links</a>
+						</li>
+						<li<?php if(basename($_SERVER['REQUEST_URI']) == 'add'): ?> class="active" <?php endif; ?> data-toggle="modal" data-target="#myModal">
+							<a href='/bookmarks/add'>Add Link</a>
+						</li>
+						<li<?php if((basename($_SERVER['REQUEST_URI']) == 'findfriends') || (basename($_SERVER['REQUEST_URI']) == 'search')): ?> class="active" <?php endif; ?>>
 							<a href='/users/findfriends'>@ Connect</a>
 						</li>
 						<li<?php if(basename($_SERVER['REQUEST_URI']) == 'profile'): ?> class="active" <?php endif; ?>>
@@ -72,6 +80,7 @@
 		
 		<div class="container">	
 			<?php if(isset($content)) echo $content; ?>
+			<?php if(isset($modal)) echo $modal; ?>
 		</div><!-- /.container -->
 		
 		<footer>

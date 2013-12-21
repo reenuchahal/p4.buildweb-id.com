@@ -7,6 +7,12 @@ class index_controller extends base_controller {
 	-------------------------------------------------------------------------------------------------*/
 	public function __construct() {
 		parent::__construct();
+		
+		if ($this->user) {
+				
+			# Route to login Page
+			Router::redirect("/bookmarks/myLinks");
+		}
 	} 
 		
 	/*-------------------------------------------------------------------------------------------------

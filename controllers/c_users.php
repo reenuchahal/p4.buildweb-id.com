@@ -35,16 +35,16 @@ class users_controller extends base_controller {
 	
 	public function p_signup() {
 		
-		# check for empty first name, last name
-		# email and password
-		if (($_POST['first_name'] == NULL) || 
-			($_POST['last_name']  == NULL) || 
-			($_POST['email'] == NULL ) ||
-			($_POST['password'] == NULL )){
-
-			# Show error
-			Router::redirect("/users/signup/error");
+		# Sanitize the user entered data
+		$_POST = DB::instance(DB_NAME)->sanitize($_POST);
+		
+		#function to remove space
+		function trim_value(&$value) {
+			$value = trim($value);
 		}
+			
+		#remove space
+		array_walk($_POST, 'trim_value');
 		
 		# Build the Query
 		$q = "SELECT token
@@ -62,7 +62,7 @@ class users_controller extends base_controller {
 			Router::redirect("/users/signup/error");
 			
 		} else {
-		
+			
 			# More data we want stored with the user
 			$_POST['created']  = Time::now();
 			$_POST['modified'] = Time::now();
@@ -242,7 +242,7 @@ class users_controller extends base_controller {
 			
 			
 			#Send them to the main page
-			Router::redirect("/posts/add");
+			Router::redirect("/bookmarks/myLinks");
 		}
 	}
 	
@@ -255,20 +255,20 @@ class users_controller extends base_controller {
 			Router::redirect('/users/profile');
 		}
 	
-			# Set View
-			$this->template->content = View::instance('v_users_forgot_password');
-			
-			#Set Error
-			$this->template->content->error = $error;
-			
-			#Set Error
-			$this->template->content->email = $email;
-			
-			# Set Title
-			$this->template->title = "Forgot password?";
+		# Set View
+		$this->template->content = View::instance('v_users_forgot_password');
+		
+		#Set Error
+		$this->template->content->error = $error;
+		
+		#Set Error
+		$this->template->content->email = $email;
+		
+		# Set Title
+		$this->template->title = "Forgot password?";
 
-			# Render View
-			echo $this->template;
+		# Render View
+		echo $this->template;
 	}
 	
 	
@@ -376,6 +376,17 @@ class users_controller extends base_controller {
 	}
 	public function p_reset_password(){
 		
+		# Sanitize the user entered data
+		$_POST = DB::instance(DB_NAME)->sanitize($_POST);
+		
+		#function to remove space
+		function trim_value(&$value) {
+			$value = trim($value);
+		}
+			
+		#remove space
+		array_walk($_POST, 'trim_value');
+		
 			# Build the Query
 				$q = "SELECT count(user_id)
 				FROM users
@@ -480,6 +491,17 @@ class users_controller extends base_controller {
 			# If user is not logged in, route to login page
 			Router::redirect('/users/login');
 		} else {
+			
+			# Sanitize the user entered data
+			$_POST = DB::instance(DB_NAME)->sanitize($_POST);
+			
+			#function to remove space
+			function trim_value(&$value) {
+			$value = trim($value);
+			}
+				
+			#remove space
+			array_walk($_POST, 'trim_value');
 			
 			# Retrieve the token if it's available
 			$q = "SELECT count(email)
@@ -594,34 +616,133 @@ class users_controller extends base_controller {
 			Router::redirect("/users/login");
 			
 		} else {
-		
+			
+			if(isset($_POST['search'])){
+				
+				# Sanitize the user entered data
+				$_POST = DB::instance(DB_NAME)->sanitize($_POST);
+				
+				# Set Variable
+				$string = $_POST['search'];
+				
+				#trim empty space and Tags
+				$string = trim(strip_tags($string));
+				
+				# Explode in words 
+				$arr_q = explode(' ', $string);
+				
+				# make a loop for query 
+				foreach ($arr_q as $key=>$word) {
+					
+					$arr_q[$key] = " first_name LIKE '%".$word."%' OR last_name LIKE '%".$word."%' ";
+				}
+				
+				# Build the query
+				$q= "SELECT *
+					FROM users
+					WHERE " . implode(' OR ', $arr_q) . " LIMIT 0,10";
+					
+				//echo $query;
+				$users = DB::instance(DB_NAME)->select_rows($q);
+			
+			} else {
+			
+				# Build the query
+				$q = "SELECT *
+				FROM users
+				"; 
+				
+				# Run the query
+				$users = DB::instance(DB_NAME)->select_rows($q);
+			}
+				
+			# Who are they following
+			$q = "SELECT *
+			From users_users
+			WHERE user_id = '".$this->user->user_id."'
+			";
+	
+			# Store our results (an array) in the variable $connections
+			$connections = DB::instance(DB_NAME)->select_array($q, 'user_id_followed');
+			
 			# Setup view
 			$this->template->content = View::instance('v_users_find_friends');
 			$this->template->title = "Find Friends";
 			
-			# Build the query
-			$q = "SELECT *
-				FROM users
-				"; 
-			
-			# Run the query
-			$users = DB::instance(DB_NAME)->select_rows($q);
-			
-			# Who are they following
-			$q = "SELECT *
-				From users_users
-				WHERE user_id = '".$this->user->user_id."'
-				";
-			
-			# Store our results (an array) in the variable $connections
-			$connections = DB::instance(DB_NAME)->select_array($q, 'user_id_followed');
-			
 			# Pass data to the View
 			$this->template->content->users = $users;
 			$this->template->content->connections = $connections;
-			
+
 			# Render the View
 			echo $this->template;
 		}
 	}
+	
+	public function follow($user_id_followed) {
+	
+		#Prepare the data array to be inserted
+		$data = Array(
+		"created" => Time::now(),
+		"user_id" => $this->user->user_id,
+		"user_id_followed" => $user_id_followed
+		);
+	
+		# Do the insert
+		DB::instance(DB_NAME)->insert('users_users', $data);
+	
+		# Send them back
+		Router::redirect("/users/findfriends");
+	}
+	
+	public function unfollow($user_id_followed) {
+	
+		# Delete this connection
+			$where_condition = 'WHERE user_id = '.$this->user->user_id.' AND user_id_followed = '.$user_id_followed;
+			DB::instance(DB_NAME)->delete('users_users', $where_condition);
+	
+			# Send them back
+			Router::redirect("/users/findfriends");
+	}
+	/*
+	public function search(){
+		
+		# Sanitize the user entered data
+		$_POST = DB::instance(DB_NAME)->sanitize($_POST);
+		
+		$string = $_POST['search'];
+		$string = trim(strip_tags($string));
+		$arr_q = explode(' ', $string);
+		
+		foreach ($arr_q as $key=>$word) {
+			$arr_q[$key] = " first_name LIKE '%".$word."%' OR last_name LIKE '%".$word."%' "; 
+		}
+		
+		$q= "SELECT * 
+			FROM users
+			WHERE " . implode(' OR ', $arr_q) . " LIMIT 0,10";
+		
+		//echo $query;
+		$users = DB::instance(DB_NAME)->select_rows($q);
+		
+		# Who are they following
+		$q = "SELECT *
+				From users_users
+				WHERE user_id = '".$this->user->user_id."'
+				";
+			
+		# Store our results (an array) in the variable $connections
+		$connections = DB::instance(DB_NAME)->select_array($q, 'user_id_followed');
+		
+		# Setup view
+		$this->template->content = View::instance('v_users_find_friends');
+		$this->template->title = "Find Friends";
+		
+		# Pass data to the View
+		$this->template->content->users = $users;
+		$this->template->content->connections = $connections;
+			
+		# Render the View
+		echo $this->template;
+		
+	}*/
 }

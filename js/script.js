@@ -3,6 +3,7 @@ $(document).ready(function(){
 	var form = $("#registrationForm");
 	var form_password = $("#formPassword");
 	var form_login = $("#forgotPasswordLogin");
+	var form_addLink = $("#addLink");
 	var firstName = $("#firstName");
 	var lastName = $("#lastName");
 	var firstNameInfo = $("#firstNameInfo");
@@ -11,6 +12,13 @@ $(document).ready(function(){
 	var yourEmailInfo = $("#yourEmailInfo");
 	var yourPassword = $("#yourPassword");
 	var yourPasswordInfo = $("#yourPasswordInfo");
+	var url = $("#url");
+	var title = $("#title");
+	var notes = $("#notes");
+	var urlError = $("#urlError");
+	var titleError = $("#titleError");
+	var notesError = $("#notesError");
+	var url_validate = /^([a-z]([a-z]|\d|\+|-|\.)*):(\/\/(((([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:)*@)?((\[(|(v[\da-f]{1,}\.(([a-z]|\d|-|\.|_|~)|[!\$&'\(\)\*\+,;=]|:)+))\])|((\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5])\.(\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5])\.(\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5])\.(\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5]))|(([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=])*)(:\d*)?)(\/(([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)*)*|(\/((([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)+(\/(([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)*)*)?)|((([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)+(\/(([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)*)*)|((([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)){0})(\?((([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)|[\uE000-\uF8FF]|\/|\?)*)?(\#((([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)|\/|\?)*)?$/i;
 	//var passwordConfirm = $("#passwordConfirm");
 	//var passwordConfirmInfo = $("#passwordConfirmInfo");
 	
@@ -27,6 +35,9 @@ $(document).ready(function(){
 	lastName.keyup(validateLastName);
 	yourEmail.keyup(validateYourEmail);
 	yourPassword.keyup(validateYourPassword);
+	url.keyup(validateURL);
+	title.keyup(validateTitle);
+	notes.keyup(validateNotes);
 	//passwordConfirm.keyup(validatePasswordConfirm);
 	
 	//On Submitting
@@ -48,6 +59,14 @@ $(document).ready(function(){
 	//On Submitting
 	form_login.submit(function(){
 		if(validateYourEmail())
+			return true
+		else
+			return false;
+	});
+	
+	//On Submitting
+	form_addLink.submit(function(){
+		if(validateURL() & validateTitle() & validateNotes())
 			return true
 		else
 			return false;
@@ -131,6 +150,11 @@ $(document).ready(function(){
 			yourPasswordInfo.text("No Blank Spaces");
 			yourPasswordInfo.addClass("error");
 			return false;
+		} else if (yourPassword.val().indexOf(' ') >= 0){
+			yourPassword.addClass("error");
+			yourPasswordInfo.text("Remove blank space(s) in your password.");
+			yourPasswordInfo.addClass("error");
+			
 		} else if (yourPassword.val().length < 5){
 			yourPassword.addClass("error");
 			yourPasswordInfo.text("Minimum 5 characters.");
@@ -163,6 +187,82 @@ $(document).ready(function(){
 			return true;
 		}
 	}*/
+	
+	function validateURL(){
+		
+		//if it's NOT valid
+		if($.trim(url.val()) == "" ){
+			url.addClass("error");
+			urlError.text("No Blank Spaces.");
+			urlError.addClass("error");
+			return false;
+		} else if  (url.val().length > 254){
+			url.addClass("error");
+			urlError.text("Max 254 characters.");
+			urlError.addClass("error");
+			return false;
+		} else if(!url_validate.test($.trim(url.val()))){
+			url.addClass("error");
+			urlError.text("Invalid URL !!!");
+			urlError.addClass("error");
+			return false;
+		}
+		//if it's valid
+		else{
+			url.removeClass("error");
+			urlError.text(" ");
+			urlError.removeClass("error");
+			return true;
+		}
+		
+	}
+	
+	
+	
+	
+	function validateTitle(){
+		//if it's NOT valid
+		if($.trim(title.val()) == "" ){
+			title.addClass("error");
+			titleError.text("No Blank Spaces.");
+			titleError.addClass("error");
+			return false;
+		} else if  (title.val().length > 254){
+			title.addClass("error");
+			titleError.text("Max 254 characters.");
+			titleError.addClass("error");
+			return false;
+		}
+		//if it's valid
+		else{
+			title.removeClass("error");
+			titleError.text(" ");
+			titleError.removeClass("error");
+			return true;
+		}
+	}
+	
+	function validateNotes(){
+		//if it's NOT valid
+		if($.trim(notes.val()) == "" ){
+			notes.addClass("error");
+			notesError.text("No Blank Spaces.");
+			notesError.addClass("error");
+			return false;
+		} else if  (notes.val().length > 1000){
+			notes.addClass("error");
+			notesError.text("Max 1000 characters.");
+			notesError.addClass("error");
+			return false;
+		}
+		//if it's valid
+		else{
+			notes.removeClass("error");
+			notesError.text(" ");
+			notesError.removeClass("error");
+			return true;
+		}
+	}
 	
 });
 

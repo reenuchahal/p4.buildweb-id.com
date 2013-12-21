@@ -54,7 +54,7 @@
 			</form>
 			<br/><br/>
 		</div>
-			<button class="btn btn-warning show" id="profileEdit">Edit</button><br/>
+			<button class="btn btn-warning show" id="profileEdit">Edit Profile</button><br/>
 		<p>
 			<b>Your Current Location </b><br/>
 			<?=$location['city'];?>, <?=$location['state'];?>, <?=$location['country_code'];?>

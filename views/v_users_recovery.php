@@ -2,8 +2,9 @@
 	<div class="row">
 		<div class="col-md-offset-1 col-xs-12 col-sm-12 col-md-10 bs-callout-warning">
 			<h4>
-				A link has been sent at your email to reset password.<br/> 
-				Please click on that link to reset it. 
+				Your instructions to reset your password have been emailed to you. <br/> 
+				If you don't receive this email within 10 minutes, 
+				check your junk and spam folders for a message from  info@p4.buildweb-id.com
 			</h4>
 		</div>
 	</div>

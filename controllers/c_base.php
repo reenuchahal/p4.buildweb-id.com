@@ -21,7 +21,8 @@ class base_controller {
 		# Set up templates
 			$this->template 	  = View::instance('_v_template');
 			$this->email_template = View::instance('_v_email');			
-								
+			$this->template->modal = View::instance('_v_modal');
+			
 		# So we can use $user in views			
 			$this->template->set_global('user', $this->user);
 			

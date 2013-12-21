@@ -123,7 +123,7 @@ class posts_controller extends base_controller {
 		# Route to login Page
 		Router::redirect("/posts/add/");
 	}
-	
+	/*
 	public function follow($user_id_followed) {
 		
 		#Prepare the data array to be inserted
@@ -148,7 +148,7 @@ class posts_controller extends base_controller {
 	
 		# Send them back
 		Router::redirect("/users/findfriends");
-	}
+	}*/
 	
 	public function delete($post_id_delete) {
 		
