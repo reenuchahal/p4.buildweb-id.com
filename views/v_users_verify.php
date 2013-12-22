@@ -20,6 +20,7 @@
 	<div class="row">
 		<div class="col-md-offset-1 col-xs-12 col-sm-12 col-md-10 bs-callout-danger">
 			<h4>The url is either invalid or you already have activated your account.</h4>
+			<h4><a href="/users/login">Login here</a></h4>
 		</div>
 	</div><br/>
 <?php endif; ?>

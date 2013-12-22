@@ -1,4 +1,3 @@
-
 <div class="row">
 	<div class="col-md-offset-2 col-sm-offset-2 col-xs-12 col-sm-8 col-md-8">
 		<div class="pull-right">
@@ -8,6 +7,7 @@
 				<p id="searchError"></p>
 			</form>
 		</div>
+		
 		<h1>Find a Connection <br/> 
 			<small><?=$user->first_name;?> <?=$user->last_name;?> (<?php echo (count($connections));?>)</small>
 		</h1><br/>
@@ -20,8 +20,10 @@
 				</blockquote>
 			</div>	
 		<?php endif; ?>	
+		
 		<h4 class="pull-right"><a href="/users/findfriends">Show all</a></h4>
 		<h3>People You May Know </h3>
+		
 		<?php if(count($users) == 0 ): ?>
 			<div class="feed-danger-display">
 				<h4> Wrong Name</a></h4>
@@ -47,7 +49,6 @@
 				<?php endif; ?>
 			<?php endforeach; ?>
 		<?php endif; ?>	
-		
 		
 		<table class="table table-hover">
 			<!-- Set variable for logged in user -->

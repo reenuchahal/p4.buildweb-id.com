@@ -33,7 +33,6 @@ input, table {
 	margin-left:20px;
 }
 
-/* Variations */
 .bs-callout-danger {
 	background-color: #fdf7f7;
 	border-color: #eed3d7;
@@ -97,6 +96,7 @@ input, table {
 	margin-bottom:20px;
 	padding-bottom:10px;	
 }
+
 .feed-danger-display h4{
 	margin-top:0px;
 	color:#333;
@@ -110,13 +110,13 @@ input, table {
 	padding:10px;
 	background-color:#F5F0EB;
 }
+
 .feed-profile-display h4 {
 	margin-top:0px;
 	color:#333;
 	padding:10px;
 	background-color:#F5FAE6;
 }
-
 
 .feed-display h4{
 	margin-top:0px;
@@ -153,5 +153,3 @@ span.url-print{
 .warning {
 	font-size:14px;
 }
-
-

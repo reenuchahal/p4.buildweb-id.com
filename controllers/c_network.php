@@ -14,9 +14,9 @@ class network_controller extends base_controller {
 	}
 	
 	public function links() {
-	
 		
-		if(isset($_POST['search'])){
+		# Do the following, if search is set
+		if(isset($_POST['search'])) {
 		
 			# Sanitize the user entered data
 			$_POST = DB::instance(DB_NAME)->sanitize($_POST);
@@ -38,52 +38,51 @@ class network_controller extends base_controller {
 		
 			# Build the query
 			$q ="SELECT a.bookmark_id,
-			a.notes,
-			a.created,
-			a.title,
-			a.url,
-			a.user_id AS bookmark_user_id,
-			b.user_id AS follower_id,
-			c.first_name,
-			c.last_name,
-			c.email
-			FROM user_bookmarks a
-			INNER JOIN users_users b
-			ON a.user_id = b.user_id_followed
-			INNER JOIN users c
-			ON a.user_id = c.user_id
-			WHERE b.user_id = '".$this->user->user_id."'
-			AND  " . implode(' OR ', $arr_q) . " 
-			ORDER BY a.created DESC";
+				a.notes,
+				a.created,
+				a.title,
+				a.url,
+				a.user_id AS bookmark_user_id,
+				b.user_id AS follower_id,
+				c.first_name,
+				c.last_name,
+				c.email
+				FROM user_bookmarks a
+				INNER JOIN users_users b
+				ON a.user_id = b.user_id_followed
+				INNER JOIN users c
+				ON a.user_id = c.user_id
+				WHERE b.user_id = '".$this->user->user_id."'
+				AND  " . implode(' OR ', $arr_q) . " 
+				ORDER BY a.created DESC";
 			
 			//echo $query;
 			$bookmarks = DB::instance(DB_NAME)->select_rows($q);
-				
+
+		# Do the following, if search is not set
 		} else {
-			
 		
-		#Build the Query
-		$q ='SELECT a.bookmark_id,
-			a.notes,
-			a.created,
-			a.title,
-			a.url,
-			a.user_id AS bookmark_user_id,
-			b.user_id AS follower_id,
-			c.first_name,
-			c.last_name,
-			c.email
-			FROM user_bookmarks a
-			INNER JOIN users_users b
-			ON a.user_id = b.user_id_followed
-			INNER JOIN users c
-			ON a.user_id = c.user_id
-			WHERE b.user_id = '.$this->user->user_id.'
-			ORDER BY a.created DESC';
-	
-		#Run the Query
-		$bookmarks = DB::instance(DB_NAME)->select_rows($q);
+			#Build the Query
+			$q ='SELECT a.bookmark_id,
+				a.notes,
+				a.created,
+				a.title,
+				a.url,
+				a.user_id AS bookmark_user_id,
+				b.user_id AS follower_id,
+				c.first_name,
+				c.last_name,
+				c.email
+				FROM user_bookmarks a
+				INNER JOIN users_users b
+				ON a.user_id = b.user_id_followed
+				INNER JOIN users c
+				ON a.user_id = c.user_id
+				WHERE b.user_id = '.$this->user->user_id.'
+				ORDER BY a.created DESC';
 		
+			#Run the Query
+			$bookmarks = DB::instance(DB_NAME)->select_rows($q);
 		}
 		
 		#Build the Query for Post Connection
@@ -118,7 +117,7 @@ class network_controller extends base_controller {
 		echo $this->template;
 	}
 	
-	public function profile($email){
+	public function profile($email) {
 		
 		# Set Query
 		$q= "SELECT first_name, last_name, email
@@ -126,10 +125,10 @@ class network_controller extends base_controller {
 			WHERE email = '".$email."'
 			";
 		
-		
 		$profile= DB::instance(DB_NAME)->select_array($q, 'email');
 		
-		if(isset($_POST['search'])){
+		# Do the following, if search is set
+		if(isset($_POST['search'])) {
 		
 			# Sanitize the user entered data
 			$_POST = DB::instance(DB_NAME)->sanitize($_POST);
@@ -159,22 +158,22 @@ class network_controller extends base_controller {
 			
 			# Run the command and store it as variable
 			$profile_links = DB::instance(DB_NAME)->select_rows($q);
-						
+
+		# Do the following, if search is not set
 		} else {
 			
-		# Set Query to get bookMarks for the profile user
-		$q = "SELECT  a.title, a.url, a.notes, a.created, b.user_id, b.email, b.first_name, b.last_name
-				FROM user_bookmarks a, users b
-				WHERE a.user_id = b.user_id
-				AND b.email = '".$email."'
-				ORDER BY a.created desc
-				";
-		
-		# Run the command and store it as variable
-		$profile_links = DB::instance(DB_NAME)->select_rows($q);
+			# Set Query to get bookMarks for the profile user
+			$q = "SELECT  a.title, a.url, a.notes, a.created, b.user_id, b.email, b.first_name, b.last_name
+					FROM user_bookmarks a, users b
+					WHERE a.user_id = b.user_id
+					AND b.email = '".$email."'
+					ORDER BY a.created desc
+					";
+			
+			# Run the command and store it as variable
+			$profile_links = DB::instance(DB_NAME)->select_rows($q);
 		
 		}
-		
 		
 		# Set Query
 		$q= "SELECT user_id
@@ -207,25 +206,25 @@ class network_controller extends base_controller {
 		$this->template->content = View::instance('v_network_profile');
 		$this->template->title = "My Profile";
 		
+		# Setup Variables
 		$this->template->content->email = $email;
 		$this->template->content->profile = $profile;
 		$this->template->content->profile_links = $profile_links;
 		$this->template->content->connections = $connections;
 		$this->template->content->follower = $follower;
 		
+		# Render the template
 		echo $this->template;
-		
-		
 	}
 	
 	public function like($bookmark_id_like) {
 	
 		#Prepare the data array to be inserted
 		$data = Array(
-		"liked" => Time::now(),
-		"user_id" => $this->user->user_id,
-		"bookmark_id" => $bookmark_id_like
-		);
+			"liked" => Time::now(),
+			"user_id" => $this->user->user_id,
+			"bookmark_id" => $bookmark_id_like
+			);
 	
 		# Insert Like this connection
 		DB::instance(DB_NAME)->insert('likes', $data);
@@ -244,5 +243,4 @@ class network_controller extends base_controller {
 		# Send them back
 		Router::redirect("/network/links");
 	}
-	
 }

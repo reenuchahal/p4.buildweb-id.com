@@ -6,10 +6,10 @@
 	<p> 
 		Click on this link to reset your password<br/>
 		<a href="http://p4.buildweb-id.com/users/reset_password/<?=$_POST['email'];?>/<?=$token?>">http://p4.buildweb-id.com/users/reset_password/<?=$_POST['email'];?>/<?=$token?></a>
-		
+	
 		<br/><br/>
 	
-		Have a Great Web BookMark with your friends.
+		Have a Great Web BookMarking with others.
 		<br/><br/><br/>
 	
 		~ Web BookMark Team

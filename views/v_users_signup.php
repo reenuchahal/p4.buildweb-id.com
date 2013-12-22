@@ -1,8 +1,8 @@
 <div class="row" >
 	<form method="POST" action="/users/p_signup" id="registrationForm">
 		<div class="col-md-offset-1 col-xs-12 col-sm-6 col-md-5">
-			<h1>Signup for Web BookMark</h1><br/>
-			<p>Sign up for Web BookMark. Save, organize, and discover interesting links on the web. Instantly connect to what's most important to you. Connect to others to checkout what they have saved.</p>
+			<h2>Signup for Web BookMark</h2><br/>
+			<p>Don't loose your links. Save, organize, and discover interesting links on the web. Connect to others to checkout what they have saved.</p>
 			<p class="text-muted warning">By clicking Sign Up, you agree to our Terms and that you have read our Data Use Policy, including our Cookie Use.</p><br/>
 		</div> <!-- / .col-md-offset-1 .col-xs-12 .col-sm-6 .col-md-5 -->
 		
@@ -26,11 +26,6 @@
 			<label for="yourPassword">Password</label>
 			<input class="form-control" placeholder="Password" id="yourPassword" type="password" name="password" required><br/>
 			<p id="yourPasswordInfo"></p>
-			
-			<!-- Confirm Password input 
-			<label for="passwordConfirm">Confirm Password</label>
-			<input id="passwordConfirm" name="passwordConfirm" type="password" />
-			<p id="passwordConfirmInfo"></p>-->
 			
 			<!-- If there is an error, Show this message -->
 			<?php if(isset($error)): ?>

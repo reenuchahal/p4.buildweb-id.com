@@ -40,6 +40,4 @@ class index_controller extends base_controller {
 			echo $this->template;
 
 	} # End of method
-	
-	
 } # End of class

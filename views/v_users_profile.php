@@ -1,5 +1,4 @@
 <div class="row">
-
 	<div class="col-md-offset-1 col-xs-12 col-sm-5 col-md-5">
 		<!-- If User upload an image -->
 		<?php if($user->profile_image): ?>
@@ -12,19 +11,23 @@
 	</div><!-- / .col-md-offset-1 .col-xs-12 .col-sm-5 .col-md-5 -->
 	
 	<div class="col-md-offset-1 col-sm-offset-1 col-xs-6 col-sm-5 col-md-4" >
+	
 		<h1>Your Profile</h1><br/>
+		
 		<div id="profileInfo" class="show">
-		<p>
-			<b>Name:</b> <?=$user->first_name?>  <?=$user->last_name?><br/>
-			<b>Email:</b> <?=$user->email?>
-		</p><br/>
-		<!-- If there is an error, Show this message -->
-		<?php if(isset($error) & isset($unique_email_error)): ?>
-			<p class="error">
-				Someone else is using this email, Please use another email.
-			</p>
-		<?php endif; ?> 
-	</div>
+			<p>
+				<b>Name:</b> <?=$user->first_name?>  <?=$user->last_name?><br/>
+				<b>Email:</b> <?=$user->email?>
+			</p><br/>
+			
+			<!-- If there is an error, Show this message -->
+			<?php if(isset($error) & isset($unique_email_error)): ?>
+				<p class="error">
+					Someone else is using this email, Please use another email.
+				</p>
+			<?php endif; ?> 
+		</div>
+	
 		<div id="profileInfoEdit" class="hidden">
 			<form method="POST" action="/users/p_profileEdit" id="registrationForm">
 	
@@ -54,12 +57,14 @@
 			</form>
 			<br/><br/>
 		</div>
-			<button class="btn btn-warning show" id="profileEdit">Edit Profile</button><br/>
+		
+		<button class="btn btn-warning show" id="profileEdit">Edit Profile</button><br/>
+		
 		<p>
 			<b>Your Current Location </b><br/>
 			<?=$location['city'];?>, <?=$location['state'];?>, <?=$location['country_code'];?>
 		</p><br/>
-		
+			
 		<form enctype="multipart/form-data" method="POST" action="/users/p_profile">
 			<!-- Upload Image Here -->
 			<label for="imageInputFile">Upload your profile image here</label>
@@ -73,7 +78,6 @@
 			<button type="submit" class="btn btn-default">Upload</button><br/><br/><br/>
 		</form>
 	</div> <!-- / .col-md-offset-1 .col-sm-offset-1 .col-xs-6 .col-sm-5 .col-md-4 -->	
-
 </div> <!-- / .row -->
   
                        

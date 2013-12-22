@@ -85,8 +85,6 @@ class users_controller extends base_controller {
 			# Find Match
 			$token = DB::instance(DB_NAME)->select_field($q);
 			
-			
-			
 			# Set to, from, subject and body for a Welcome Email
 			$to[]    = Array("name" => $_POST['first_name'], "email" => $_POST['email']);
 			$from    = Array("name" => APP_NAME, "email" => APP_EMAIL);
@@ -95,7 +93,6 @@ class users_controller extends base_controller {
 			$body->token = $token;
 			# Send Welcome email
 			$email = Email::send($to, $from, $subject, $body, true, '');
-			
 			
 			# Route to login Page
 			Router::redirect("/users/signup_result/");
@@ -135,6 +132,7 @@ class users_controller extends base_controller {
 			Router::redirect("/users/signup_result/error1");
 				
 		} else {
+			
 			# Build the Query
 			$q = "SELECT *
 				FROM users
@@ -167,13 +165,11 @@ class users_controller extends base_controller {
 			    		
 				# Route to login Page
 				Router::redirect("/users/signup_result/match/error");
-						
 			}
 		}
 	}
 	
-	
-	public function login ($loginMessage = NULL, $error = NULL ) {
+	public function login($loginMessage = NULL, $error = NULL ) {
 		
 		# If user is logged in; redirect it to the Profile page
 		if($this->user) {
@@ -201,14 +197,6 @@ class users_controller extends base_controller {
 	
 	
 	public function p_login() {
-		
-		# check for empty email and password
-		if (($_POST['email'] == NULL ) ||
-		($_POST['password'] == NULL )){
-		
-			# Show error
-			Router::redirect("/users/login/loginMessage/error");
-		}
 		
 		# Sanitize the user entered data
 		$_POST = DB::instance(DB_NAME)->sanitize($_POST);
@@ -319,7 +307,6 @@ class users_controller extends base_controller {
 			# Route to login Page
 			Router::redirect("/users/recover_password_result/");
 		}
-		
 	}
 	
 	public function recover_password_result($success= NULL, $error1 = NULL, $error2 = NULL) {
@@ -327,27 +314,27 @@ class users_controller extends base_controller {
 		# If user is logged in; redirect it to the Profile page
 		if($this->user) {
 	
-		# Route to Profile page
+			# Route to Profile page
 			Router::redirect('/users/profile');
 		}
 	
-			# Set View
-			$this->template->content = View::instance('v_users_recovery');
+		# Set View
+		$this->template->content = View::instance('v_users_recovery');
 
-			# Set Page Title
-			$this->template->title = "Recover Password";
-			
-			# Pass error data to the view
-			$this->template->content->success = $success;
+		# Set Page Title
+		$this->template->title = "Recover Password";
+		
+		# Pass error data to the view
+		$this->template->content->success = $success;
 
-			# Pass error data to the view
-			$this->template->content->error1 = $error1;
+		# Pass error data to the view
+		$this->template->content->error1 = $error1;
 
-			# Pass error data to the view
-			$this->template->content->error2 = $error2;
+		# Pass error data to the view
+		$this->template->content->error2 = $error2;
 
-			# Render View
-			echo $this->template;
+		# Render View
+		echo $this->template;
 	}
 	
 	public function reset_password($email = NULL, $token = NULL) {
@@ -355,17 +342,17 @@ class users_controller extends base_controller {
 		# If user is logged in; redirect it to the Profile page
 		if($this->user) {
 	
-		# Route to Profile page
-		Router::redirect('/users/profile');
+			# Route to Profile page
+			Router::redirect('/users/profile');
 		}
 	
 		# Set View
 		$this->template->content = View::instance('v_reset_password');
 	
-			# Set Page Title
+		# Set Page Title
 		$this->template->title = "Recover Password";
 	
-			# Pass error data to the view
+		# Pass error data to the view
 		$this->template->content->email = $email;
 	
 		# Pass error data to the view
@@ -374,7 +361,8 @@ class users_controller extends base_controller {
 		# Render View
 		echo $this->template;
 	}
-	public function p_reset_password(){
+	
+	public function p_reset_password() {
 		
 		# Sanitize the user entered data
 		$_POST = DB::instance(DB_NAME)->sanitize($_POST);
@@ -387,19 +375,20 @@ class users_controller extends base_controller {
 		#remove space
 		array_walk($_POST, 'trim_value');
 		
-			# Build the Query
-				$q = "SELECT count(user_id)
-				FROM users
-				WHERE email = '".$_POST['email']."'
-				AND token = '".$_POST['token']."'
-				AND active = 0
-				";
+		# Build the Query
+		$q = "SELECT count(user_id)
+			FROM users
+			WHERE email = '".$_POST['email']."'
+			AND token = '".$_POST['token']."'
+			AND active = 0
+			";
+	
+		# Find Match
+		$match = DB::instance(DB_NAME)->select_field($q);
+			
+			 
+		if($match > 0) {
 		
-			# Find Match
-				$match = DB::instance(DB_NAME)->select_field($q);
-				
-				 
-			if($match > 0) {
 			# Sanitize the user entered data
 			$_POST = DB::instance(DB_NAME)->sanitize($_POST);
 			
@@ -421,17 +410,13 @@ class users_controller extends base_controller {
 			
 			# Route to profile page
 			Router::redirect("/users/recover_password_result/success");
-	    } else {
-						
-					# Route to login Page
-					Router::redirect("/users/recover_password_result/result/match/error");
-			}	
-	    
-		
-		
+			
+		} else {
+					
+			# Route to login Page
+			Router::redirect("/users/recover_password_result/result/match/error");
+		}	
 	}
-	
-	
 	
 	public function logout() {
 	
@@ -490,6 +475,7 @@ class users_controller extends base_controller {
 				
 			# If user is not logged in, route to login page
 			Router::redirect('/users/login');
+			
 		} else {
 			
 			# Sanitize the user entered data
@@ -497,7 +483,7 @@ class users_controller extends base_controller {
 			
 			#function to remove space
 			function trim_value(&$value) {
-			$value = trim($value);
+				$value = trim($value);
 			}
 				
 			#remove space
@@ -556,10 +542,7 @@ class users_controller extends base_controller {
 				Router::redirect("/users/profile/error/unique_email/");
 				
 			} 
-			
 		}
-		
-		
 	}
 	
 	public function p_profile() {
@@ -604,7 +587,6 @@ class users_controller extends base_controller {
 			# Route to profile page's Error
 			Router::redirect("/users/profile/error");
 		}
-	
 	}
 	
 	public function findfriends() {
@@ -703,46 +685,5 @@ class users_controller extends base_controller {
 			# Send them back
 			Router::redirect("/users/findfriends");
 	}
-	/*
-	public function search(){
-		
-		# Sanitize the user entered data
-		$_POST = DB::instance(DB_NAME)->sanitize($_POST);
-		
-		$string = $_POST['search'];
-		$string = trim(strip_tags($string));
-		$arr_q = explode(' ', $string);
-		
-		foreach ($arr_q as $key=>$word) {
-			$arr_q[$key] = " first_name LIKE '%".$word."%' OR last_name LIKE '%".$word."%' "; 
-		}
-		
-		$q= "SELECT * 
-			FROM users
-			WHERE " . implode(' OR ', $arr_q) . " LIMIT 0,10";
-		
-		//echo $query;
-		$users = DB::instance(DB_NAME)->select_rows($q);
-		
-		# Who are they following
-		$q = "SELECT *
-				From users_users
-				WHERE user_id = '".$this->user->user_id."'
-				";
-			
-		# Store our results (an array) in the variable $connections
-		$connections = DB::instance(DB_NAME)->select_array($q, 'user_id_followed');
-		
-		# Setup view
-		$this->template->content = View::instance('v_users_find_friends');
-		$this->template->title = "Find Friends";
-		
-		# Pass data to the View
-		$this->template->content->users = $users;
-		$this->template->content->connections = $connections;
-			
-		# Render the View
-		echo $this->template;
-		
-	}*/
+	
 }

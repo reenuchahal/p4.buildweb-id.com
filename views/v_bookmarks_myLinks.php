@@ -1,8 +1,9 @@
 <div class="row">
 	<div class="col-md-offset-2 col-xs-12 col-sm-10 col-md-8">
+	
+		<!-- Show if there is no pook marks and search is not set
+		=========================================== -->
 		<?php if(count($bookmarks) == 0 & !isset($_POST['search'])): ?>
-			<!-- LoggedIn User INFO
-			=========================================== -->
 			<h1><?=$user->first_name;?> <?=$user->last_name;?></h1>
 			<p><b><?=count($bookmarks);?></b> <small>links</small>&nbsp;&nbsp;
 			<b><?php echo (count($connections));?></b> <small>following</small>&nbsp;&nbsp; 
@@ -10,7 +11,8 @@
 			<br/>
 		<?php endif; ?>
 		
-		<!-- Show this if there is/are bookmark/s
+		<!-- Show this if there is/are bookmark/s Or
+			There is no bookmarks and search is set
 		=========================================== -->
 		<?php if(count($bookmarks) > 0 or (count($bookmarks) == 0 & isset($_POST['search']))): ?>
 			<div class="pull-right">
@@ -20,6 +22,7 @@
 					<p id="searchError"></p>
 				</form>
 			</div>
+			
 			<!-- LoggedIn User INFO
 			=========================================== -->
 			<h1><?=$user->first_name;?> <?=$user->last_name;?></h1>
@@ -27,9 +30,11 @@
 			<b><?php echo (count($connections));?></b> <small>following</small>&nbsp;&nbsp; 
 			<b><?php echo (count($follower));?></b> <small>follower</small> </p> 
 			<br/>
+			
 			<div class="pull-right">
 				<p>+<a data-toggle="modal" data-target="#myModal" href="#"> Add New Link</a></p>
 			</div>
+			
 			<div class="pull-left">
 				<p><a href="/bookmarks/myLinks">Show all</a></p>
 			</div><br/><br/>
@@ -38,6 +43,9 @@
 		<!-- Show this if there is no bookmark
 		=========================================== -->
 		<?php if(count($bookmarks) == 0): ?>
+			
+			<!-- Show if search is not set
+			=========================================== -->
 	   		 <?php if(!isset($_POST['search'])): ?>
 				<div class="feed-danger-display">
 					<h4> Start by <a data-toggle="modal" data-target="#myModal" href="#">adding your first link</a></h4>
@@ -45,8 +53,10 @@
 						<p>There's no activity in your account.</p>
 					</blockquote>
 				</div>	
-			<?php else: ?>
 			
+			<!-- Show if search is set
+			=========================================== -->	
+			<?php else: ?>
 				<div class="feed-danger-display">
 					<h4>No Match Found!!!</h4>
 					<blockquote>
@@ -130,6 +140,7 @@
 				</div><!-- /.modal-dialog -->
 			</div><!-- /.modal -->
 		<?php endforeach;?>
+		
 	</div> <!-- / .col-md-offset-2 .col-xs-12 .col-sm-10 .col-md-8 -->
 </div> <!-- / .row -->
 

@@ -6,13 +6,14 @@
 	<p> 
 		Thank you for signing up at Web BookMark. Your may login to 
 		<a href="http://p4.buildweb-id.com/users/login/">Web BooKMark</a> 
-		Using the following email:
-		<br/><br/>
-		Click on this link to activate your account:<br/>
-		<a href="http://p4.buildweb-id.com/users/verify/<?=$_POST['email'];?>/<?=$token?>">http://p4.buildweb-id.com/users/verify/<?=$_POST['email'];?>/<?=$token?></a>
+		Using the following email-<br/>
 		Email: <?=$_POST['email'];?>
 		<br/><br/>
-	
+		
+		Click on this link to activate your account:<br/>
+		<a href="http://p4.buildweb-id.com/users/verify/<?=$_POST['email'];?>/<?=$token?>">http://p4.buildweb-id.com/users/verify/<?=$_POST['email'];?>/<?=$token?></a>
+		<br/><br/>
+		
 		Have a Great Web BookMark with your friends.
 		<br/><br/><br/>
 	

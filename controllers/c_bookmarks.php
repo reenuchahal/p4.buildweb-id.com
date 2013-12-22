@@ -11,14 +11,15 @@ class bookmarks_controller extends base_controller {
 			# Route to login Page
 			Router::redirect("/users/login/");
 		}
-		
-	}
+	
+	} # End of method
 	
 	public function index() {
 	
 		# Route to posts/add page
 		Router::redirect("/bookmarks/myLinks");
-	}
+	
+	} # End of method
 	
 	public function p_add() {
 		
@@ -45,11 +46,12 @@ class bookmarks_controller extends base_controller {
 		
 		# Route to posts/add page
 		Router::redirect("/bookmarks/myLinks");
-		
-	}
+	
+	} # End of method
 	
 	public function myLinks() {
 		
+		# Do the following, if search is set
 		if(isset($_POST['search'])){
 		
 			# Sanitize the user entered data
@@ -68,15 +70,14 @@ class bookmarks_controller extends base_controller {
 			foreach ($arr_q as $key=>$word) {
 		
 				$arr_q[$key] = " (title LIKE '%".$word."%' OR url LIKE '%".$word."%' OR notes LIKE '%".$word."%') ";
-			
 			}
 		
 			# Set Query to get bookMarks for the logged In use
 			$q = "SELECT * FROM user_bookmarks
-			WHERE user_id = '".$this->user->user_id."'
-			AND  " . implode(' OR ', $arr_q) . "
-			ORDER BY created desc
-			";
+				WHERE user_id = '".$this->user->user_id."'
+				AND  " . implode(' OR ', $arr_q) . "
+				ORDER BY created desc
+				";
 						
 			//echo $query;
 			$bookmarks = DB::instance(DB_NAME)->select_rows($q);
@@ -84,16 +85,16 @@ class bookmarks_controller extends base_controller {
 		} else {
 			
 		
-		# Set Query to get bookMarks for the logged In use
-		$q = "SELECT * FROM user_bookmarks
-				WHERE user_id = '".$this->user->user_id."'
-				ORDER BY created desc
-				";
+			# Set Query to get bookMarks for the logged In use
+			$q = "SELECT * FROM user_bookmarks
+					WHERE user_id = '".$this->user->user_id."'
+					ORDER BY created desc
+					";
 		
-		# Run the command and store it as variable
-		$bookmarks = DB::instance(DB_NAME)->select_rows($q);
-		
-		}
+			# Run the command and store it as variable
+			$bookmarks = DB::instance(DB_NAME)->select_rows($q);
+			
+		} 
 		
 		# Who are logged in user following
 		$q = "SELECT *
@@ -123,7 +124,7 @@ class bookmarks_controller extends base_controller {
 		# Render the template
 		echo $this->template;
 		
-	}
+	} # End of method
 	
 	public function delete($bookmark_id_delete) {
 	
@@ -134,7 +135,8 @@ class bookmarks_controller extends base_controller {
 	
 		# Send them back
 		Router::redirect("/bookmarks/myLinks");
-	}
+	
+	} # End of method
 	
 	public function edit($bookmark_id_edit){
 		
@@ -166,6 +168,8 @@ class bookmarks_controller extends base_controller {
 
 		# Route to profile page
 		Router::redirect("/bookmarks/myLinks");
-	}
-}
+	
+	} # End of method
+
+} # End of class
 
