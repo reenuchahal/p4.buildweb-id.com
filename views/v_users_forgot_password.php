@@ -9,7 +9,6 @@
 			<input class="form-control" value="<?php echo $email?>" placeholder="Your Email" id="yourEmail" type="text" name="email" required><br/>
 			<p id="yourEmailInfo"></p>
 		
-		
 			<?php if(isset($error) ): ?>
 				<p class="error">This email is not registered to the Web BookMark.</p>
 			<?php endif; ?>
