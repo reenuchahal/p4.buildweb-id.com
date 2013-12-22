@@ -1,3 +1,4 @@
+<!-- If success, error1 and error2 are not set -->
 <?php if(!isset($success) &!isset($error1) & !isset($error2)): ?>
 	<div class="row">
 		<div class="col-md-offset-1 col-xs-12 col-sm-12 col-md-10 bs-callout-warning">
@@ -9,6 +10,8 @@
 		</div>
 	</div>
 <?php endif; ?>
+
+<!-- If success message is set but error1 and error2 are not set -->
 <?php if(isset($success) &!isset($error1) & !isset($error2)): ?>
 	<div class="row">
 		<div class="col-md-offset-1 col-xs-12 col-sm-12 col-md-10 bs-callout-success">
@@ -18,6 +21,8 @@
 		</div>
 	</div>
 <?php endif; ?>
+
+<!-- If error1 is set and error2 is not set -->
 <?php if(isset($success) & isset($error1) & !isset($error2)): ?>
 	<div class="row">
 		<div class="col-md-offset-1 col-xs-12 col-sm-12 col-md-10 bs-callout-danger">
@@ -25,6 +30,8 @@
 		</div>
 	</div><br/>
 <?php endif; ?>
+
+<!-- If error2 is set -->
 <?php if(isset($success) & isset($error1) & isset($error2)): ?>
 	<div class="row">
 		<div class="col-md-offset-1 col-xs-12 col-sm-12 col-md-10 bs-callout-danger">
