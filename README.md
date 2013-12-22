@@ -11,7 +11,7 @@ I have provided a keyword search option to search your interest.
 
 Final Project Features:
 
-1) Email verification to create an account (requires users to click a link in their email before their account is created).
+1) Email verification to create an account (requires users to click a link in their email before their account is created).<br/>
 2) Password reset (requires users to click a link in their email to reset password).
 3) Upload a profile photo
 4) Edit and display basic profile info.
