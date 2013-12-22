@@ -35,7 +35,6 @@
 		<!-- Show this if there is/are bookmark/s
 		=========================================== -->
 		<?php if(count($bookmarks) == 0): ?>
-		
 			<?php if(!isset($_POST['search'])): ?>
 				<div class="feed-danger-display">
 					<h4> Web Bookmark is more fun with friends.  <a href="/users/findfriends">Find my friends.</a></h4>
@@ -54,7 +53,6 @@
 					</blockquote>
 				</div>
 			<?php endif; ?>
-			
 		<?php endif; ?>	
 	</div> <!-- / .col-md-offset-2 .col-xs-12 .col-sm-10 .col-md-8  -->
 </div> <!-- / .row -->
@@ -70,8 +68,7 @@
 			?>
 			
 			<div class="feed-network-display">
-			
-			  	<h4><a href="/network/profile/<?=$bookmark['email']?>"><?=$bookmark['first_name']?> <?=$bookmark['last_name']?></a></h4>
+				<h4><a href="/network/profile/<?=$bookmark['email']?>"><?=$bookmark['first_name']?> <?=$bookmark['last_name']?></a></h4>
 				<blockquote>
 					<p><?=$bookmark['notes']?></p>
 					<p><a href="<?=$bookmark['url']?>" target="_blank"><?=$bookmark['title']?> <span class="url-print"><?=$url_print;?></span></a></p>
@@ -93,7 +90,6 @@
 					
 					<a data-toggle="modal" data-target="#myModalAddLink"  class="btn btn-default btn-xs" >Add Link</a>
 				</div><!-- / .text-right -->
-				
 			</div> <!-- / .feed-display -->
 
 			<!-- Modal Add Link
