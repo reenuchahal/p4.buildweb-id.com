@@ -84,7 +84,7 @@
 			?>
 		
 			<div class="feed-display">
-				<h4><a href="<?=$bookmark['url']?>" target="_blank"><?=$bookmark['title']?> <span class="url-print"><?=$url_print;?></a></h4>
+				<h4><a href="<?=$bookmark['url']?>" target="_blank"><?=$bookmark['title']?> <span class="url-print"><?=$url_print;?></span></a></h4>
 				<blockquote>
 					<p><?=$bookmark['notes']?></p>
 					<time datetime="<?=Time::display($bookmark['created'],'Y-m-d')?>">
@@ -93,8 +93,8 @@
 				</blockquote>
 				
 				<div class="text-right delete-btn">
-					<a data-toggle="modal" data-target="#myModalDelete" class="btn btn-danger btn-sm" >Delete</a>
-					<a data-toggle="modal" data-target="#myModalEdit"  class="btn btn-default btn-sm" >Edit</a>
+					<a data-toggle="modal" data-target="#myModalDelete" class="btn btn-danger btn-sm">Delete</a>
+					<a data-toggle="modal" data-target="#myModalEdit"  class="btn btn-default btn-sm">Edit</a>
 				</div>		
 			</div> <!-- / .feed-display -->
 			
@@ -106,7 +106,7 @@
 						<div class="modal-body">
 							<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 							<p>Are you sure to delete this link?</p><br/>&nbsp;&nbsp;&nbsp;&nbsp;
-							<a class="btn btn-danger btn-sm"" href="/bookmarks/delete/<?=$bookmark['bookmark_id']?>">Delete</a>
+							<a class="btn btn-danger btn-sm" href="/bookmarks/delete/<?=$bookmark['bookmark_id']?>">Delete</a>
 							<a class="btn btn-default btn-sm" data-dismiss="modal" aria-hidden="true">Cancel</a>
 						</div>
 					</div><!-- /.modal-content -->
@@ -124,12 +124,12 @@
 							
 								<!-- URL input -->
 								<label for="url">URL</label>
-								<input class="form-control" size="50" max="250" value="<?=$bookmark['url']?>" placeholder="url" id="url" type="text" name="url" required><br/>
+								<input class="form-control" size="50" value="<?=$bookmark['url']?>" placeholder="url" id="url" type="text" name="url" required><br/>
 								<p id="urlError"></p>
 								
 								<!-- Title input -->
 								<label for="title">Title</label>
-								<input class="form-control" size="50" max="250" value="<?=$bookmark['title']?>" placeholder="title" id="title" type="text" name="title" required><br/>
+								<input class="form-control" size="50" value="<?=$bookmark['title']?>" placeholder="title" id="title" type="text" name="title" required><br/>
 								<p id="titleError"></p>
 								
 								<!-- Comment Textarea -->
@@ -138,7 +138,7 @@
 								<p id="notesError"></p>
 											 
 								<div class="text-right">
-									<button  type="submit" class="btn btn-success btn-sm"">Update Link</button>&nbsp;&nbsp;<a class="btn btn-default btn-sm" data-dismiss="modal" aria-hidden="true">Cancel</a>
+									<button  type="submit" class="btn btn-success btn-sm">Update Link</button>&nbsp;&nbsp;<a class="btn btn-default btn-sm" data-dismiss="modal" aria-hidden="true">Cancel</a>
 								</div>
 							</form>
 						</div>
