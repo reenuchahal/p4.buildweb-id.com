@@ -678,10 +678,10 @@ class users_controller extends base_controller {
 	
 		#Prepare the data array to be inserted
 		$data = Array(
-		"created" => Time::now(),
-		"user_id" => $this->user->user_id,
-		"user_id_followed" => $user_id_followed
-		);
+			"created" => Time::now(),
+			"user_id" => $this->user->user_id,
+			"user_id_followed" => $user_id_followed
+			);
 	
 		# Do the insert
 		DB::instance(DB_NAME)->insert('users_users', $data);
