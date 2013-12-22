@@ -5,6 +5,7 @@
 		</div>
 	</div><br/>
 <?php endif; ?>
+
 <div class="row">
 	<form  method="POST" action="/users/p_login">
 		<div class="col-md-offset-1 col-xs-12 col-sm-6 col-md-5">
