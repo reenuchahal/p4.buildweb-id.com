@@ -17,7 +17,6 @@ label, p {
 }
 
 footer {
-	
 	color: #333333;
 	padding:15px;
 }
@@ -26,25 +25,26 @@ input, table {
 	font-size:14px;
 }
 
-/* All Class rules here*/
 
+/* All Class rules here
+===================================== */
 .avatar {
 	margin-top:8px;
 	margin-left:20px;
 }
 
 .bs-callout-danger {
-	background-color: #fdf7f7;
+	background-color:#fdf7f7;
 	border-color: #eed3d7;
 }
 
 .bs-callout-danger h4 {
-	color: #b94a48;
+	color:#b94a48;
 	line-height:30px;
 }
 
 .bs-callout-warning {
-	background-color: #faf8f0;
+	background-color:#faf8f0;
 	border-color: #faebcc;
 }
 
@@ -54,27 +54,27 @@ input, table {
 }
 
 .bs-callout-success {
-	background-color: #dff0d8;
-	border-color: #d6e9c6;
+	background-color:#dff0d8;
+	border-color:#d6e9c6;
 }
 
 .bs-callout-success h4 {
-	color: #468847;
+	color:#468847;
 	line-height:30px;
 }
 
 .bs-callout-info {
-	background-color: #f4f8fa;
-	border-color: #bce8f1;
+	background-color:#f4f8fa;
+	border-color:#bce8f1;
 }
 
 .bs-callout-info h4 {
-	color: #34789a;
+	color:#34789a;
 }
 
 .container {
 	min-height:450px;
-	margin-top: 100px;
+	margin-top:100px;
 }
 
 .delete-btn {
@@ -101,7 +101,7 @@ input, table {
 	margin-top:0px;
 	color:#333;
 	padding:10px;
-	background-color:	#FFE6E6;
+	background-color:#FFE6E6;
 }
 
 .feed-network-display h4{
@@ -122,7 +122,7 @@ input, table {
 	margin-top:0px;
 	color:#333;
 	padding:10px;
-	background-color:	#E6FAFF;
+	background-color:#E6FAFF;
 }
 
 .feed-display p, .feed-display time {
@@ -131,12 +131,6 @@ input, table {
 
 .follow-width {
 	width:50%;
-}
-
-body.modal-open, 
-.modal-open .navbar-fixed-top, 
-.modal-open .navbar-fixed-bottom {
-	margin-right:0 !important;
 }
 
 .navbar-inverse .navbar-brand:hover, 
@@ -152,4 +146,13 @@ span.url-print{
 
 .warning {
 	font-size:14px;
+}
+
+
+/* Boot strap class overWritten Rules
+========================================== */
+body.modal-open, 
+.modal-open .navbar-fixed-top, 
+.modal-open .navbar-fixed-bottom {
+	margin-right:0 !important;
 }
