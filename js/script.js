@@ -21,7 +21,6 @@ $(document).ready(function() {
 	var notesError = $("#notesError");
 	var url_validate = /^([a-z]([a-z]|\d|\+|-|\.)*):(\/\/(((([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:)*@)?((\[(|(v[\da-f]{1,}\.(([a-z]|\d|-|\.|_|~)|[!\$&'\(\)\*\+,;=]|:)+))\])|((\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5])\.(\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5])\.(\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5])\.(\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5]))|(([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=])*)(:\d*)?)(\/(([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)*)*|(\/((([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)+(\/(([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)*)*)?)|((([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)+(\/(([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)*)*)|((([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)){0})(\?((([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)|[\uE000-\uF8FF]|\/|\?)*)?(\#((([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)|\/|\?)*)?$/i;
 	
-	
 	//On key press
 	firstName.keyup(validateFirstName);
 	lastName.keyup(validateLastName);
@@ -30,7 +29,6 @@ $(document).ready(function() {
 	url.keyup(validateURL);
 	title.keyup(validateTitle);
 	notes.keyup(validateNotes);
-	
 	
 	//On Submitting
 	form.submit(function() {
@@ -97,19 +95,19 @@ $(document).ready(function() {
 	function validateFirstName() {
 		
 		//if it's NOT valid
-		if($.trim(firstName.val()) == ""){
+		if($.trim(firstName.val()) == "") {
 			firstName.addClass("error");
 			firstNameInfo.text("No Blank Spaces.");
 			firstNameInfo.addClass("error");
 			return false;
 			
-		} else if (firstName.val().length < 2){
+		} else if (firstName.val().length < 2) {
 			firstName.addClass("error");
 			firstNameInfo.text("Minimum 2 letters.");
 			firstNameInfo.addClass("error");
 			return false;
 			
-		} else if  (firstName.val().length > 254){
+		} else if  (firstName.val().length > 254) {
 			firstName.addClass("error");
 			firstNameInfo.text("Max 254 characters.");
 			firstNameInfo.addClass("error");
@@ -128,19 +126,19 @@ $(document).ready(function() {
 	function validateLastName() {
 		
 		//if it's NOT valid
-		if($.trim(lastName.val()) == "" ){
+		if($.trim(lastName.val()) == "" ) {
 			lastName.addClass("error");
 			lastNameInfo.text("No Blank Spaces.");
 			lastNameInfo.addClass("error");
 			return false;
 			
-		} else if  (lastName.val().length < 2){
+		} else if  (lastName.val().length < 2) {
 			lastName.addClass("error");
 			lastNameInfo.text("Minimum 2 letters.");
 			lastNameInfo.addClass("error");
 			return false;
 			
-		} else if  (lastName.val().length > 254){
+		} else if  (lastName.val().length > 254) {
 			lastName.addClass("error");
 			lastNameInfo.text("Max 254 characters.");
 			lastNameInfo.addClass("error");
@@ -156,21 +154,21 @@ $(document).ready(function() {
 	}
 	
 	// Password validation function
-	function validateYourPassword(){
+	function validateYourPassword() {
 		
 		//it's NOT valid
-		if($.trim(yourPassword.val()) == ""){
+		if($.trim(yourPassword.val()) == "") {
 			yourPassword.addClass("error");
 			yourPasswordInfo.text("No Blank Spaces");
 			yourPasswordInfo.addClass("error");
 			return false;
 			
-		} else if (yourPassword.val().indexOf(' ') >= 0){
+		} else if (yourPassword.val().indexOf(' ') >= 0) {
 			yourPassword.addClass("error");
 			yourPasswordInfo.text("Remove blank space(s) in your password.");
 			yourPasswordInfo.addClass("error");
 			
-		} else if (yourPassword.val().length < 5){
+		} else if (yourPassword.val().length < 5) {
 			yourPassword.addClass("error");
 			yourPasswordInfo.text("Minimum 5 characters.");
 			yourPasswordInfo.addClass("error");
@@ -184,22 +182,22 @@ $(document).ready(function() {
 	}
 	
 	// URL validation function
-	function validateURL(){
+	function validateURL() {
 		
 		//if it's NOT valid
-		if($.trim(url.val()) == "" ){
+		if($.trim(url.val()) == "" ) {
 			url.addClass("error");
 			urlError.text("No Blank Spaces.");
 			urlError.addClass("error");
 			return false;
 			
-		} else if  (url.val().length > 254){
+		} else if  (url.val().length > 254) {
 			url.addClass("error");
 			urlError.text("Max 254 characters.");
 			urlError.addClass("error");
 			return false;
 			
-		} else if(!url_validate.test($.trim(url.val()))){
+		} else if(!url_validate.test($.trim(url.val()))) {
 			url.addClass("error");
 			urlError.text("Invalid URL !!!");
 			urlError.addClass("error");
@@ -218,7 +216,7 @@ $(document).ready(function() {
 	function validateTitle() {
 		
 		//if it's NOT valid
-		if($.trim(title.val()) == "" ){
+		if($.trim(title.val()) == "" ) {
 			title.addClass("error");
 			titleError.text("No Blank Spaces.");
 			titleError.addClass("error");
