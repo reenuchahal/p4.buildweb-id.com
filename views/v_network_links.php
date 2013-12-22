@@ -19,6 +19,7 @@
 			<div class="pull-right">
 				<p>+<a href="/users/findfriends"> Add New Connection</a></p>
 			</div>
+			
 			<div class="pull-left">
 				<p><a href="/network/links">Show all</a></p>
 			</div>
@@ -33,7 +34,8 @@
 	
 		<!-- Show this if there is/are bookmark/s
 		=========================================== -->
-	   <?php if(count($bookmarks) == 0): ?>
+		<?php if(count($bookmarks) == 0): ?>
+		
 	   		 <?php if(!isset($_POST['search'])): ?>
 				<div class="feed-danger-display">
 					<h4> Web Bookmark is more fun with friends.  <a href="/users/findfriends">Find my friends.</a></h4>
@@ -52,6 +54,7 @@
 					</blockquote>
 				</div>
 			<?php endif; ?>
+			
 		<?php endif; ?>	
 	</div> <!-- / .col-md-offset-2 .col-xs-12 .col-sm-10 .col-md-8  -->
 </div> <!-- / .row -->
@@ -60,19 +63,21 @@
 	<div class="col-md-offset-2 col-xs-12 col-sm-10 col-md-8">
 		<?php foreach($bookmarks as $bookmark): ?>
 		
+			<!-- Remove url http:// and end slash -->
 			<?php $url_print = $bookmark['url'];
 				$url_print = str_replace(array('http://','https://','www.'), '', $url_print);
 				$url_print = rtrim($url_print, "/");
 			?>
+			
 			<div class="feed-network-display">
 			
 			  	<h4><a href="/network/profile/<?=$bookmark['email']?>"><?=$bookmark['first_name']?> <?=$bookmark['last_name']?></a></h4>
 				<blockquote>
-				<p><?=$bookmark['notes']?></p>
-				<p><a href="<?=$bookmark['url']?>" target="_blank"><?=$bookmark['title']?> <span class="url-print"><?=$url_print;?></span></a></p>
-				<time datetime="<?=Time::display($bookmark['created'],'Y-m-d')?>">
-					<?=Time::display($bookmark['created'],'Y-m-d g:i a')?>
-				</time>
+					<p><?=$bookmark['notes']?></p>
+					<p><a href="<?=$bookmark['url']?>" target="_blank"><?=$bookmark['title']?> <span class="url-print"><?=$url_print;?></span></a></p>
+					<time datetime="<?=Time::display($bookmark['created'],'Y-m-d')?>">
+						<?=Time::display($bookmark['created'],'Y-m-d g:i a')?>
+					</time>
 				</blockquote>
 				
 				<div class="text-right delete-btn">
