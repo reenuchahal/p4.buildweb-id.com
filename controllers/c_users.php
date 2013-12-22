@@ -612,6 +612,7 @@ class users_controller extends base_controller {
 			
 		} else {
 			
+			# DO the following, if search is set
 			if(isset($_POST['search'])){
 				
 				# Sanitize the user entered data
@@ -640,6 +641,7 @@ class users_controller extends base_controller {
 				//echo $query;
 				$users = DB::instance(DB_NAME)->select_rows($q);
 			
+			# DO the following, if search is not set
 			} else {
 			
 				# Build the query
