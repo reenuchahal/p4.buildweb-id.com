@@ -3,8 +3,9 @@ p4.buildweb-id.com
 Final Project Description:<br/>
 
 This website is a bookmarking website. 
-You can Save, organize, and discover interesting links on the web. 
+You can save, organize, and discover interesting links on the web. 
 User can save his favorite links to this website and check out other users links.
+User can add other user's links on his wall.
 User can create his network according to the taste of link. 
 I have provided a keyword search option to search your interest.<br/>
 
