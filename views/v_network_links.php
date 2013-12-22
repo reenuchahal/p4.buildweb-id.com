@@ -36,14 +36,14 @@
 		=========================================== -->
 		<?php if(count($bookmarks) == 0): ?>
 		
-	   		 <?php if(!isset($_POST['search'])): ?>
+			<?php if(!isset($_POST['search'])): ?>
 				<div class="feed-danger-display">
 					<h4> Web Bookmark is more fun with friends.  <a href="/users/findfriends">Find my friends.</a></h4>
 					<blockquote>
 						<p>There's no activity in your network. Try to <a href="/users/findfriends">find some friends</a> on Web BookMark.</p>
 					</blockquote>
 				</div>
-					
+				
 			<?php else: ?>
 				<div class="feed-danger-display">
 					<h4>No Match Found!!!</h4>
