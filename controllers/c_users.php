@@ -293,10 +293,10 @@ class users_controller extends base_controller {
 			
 			# Build a Query
 			$q = "UPDATE users
-					SET active = 0
-					WHERE email = '".$_POST['email']."'
-					AND token = '".$token."'
-					";
+				SET active = 0
+				WHERE email = '".$_POST['email']."'
+				AND token = '".$token."'
+				";
 				
 			# Run the command
 			DB::instance(DB_NAME)->query($q);
@@ -309,7 +309,6 @@ class users_controller extends base_controller {
 			$body->token = $token;
 			# Send Welcome email
 			$email = Email::send($to, $from, $subject, $body, true, '');
-				
 				
 			# Route to login Page
 			Router::redirect("/users/recover_password_result/");
@@ -407,12 +406,12 @@ class users_controller extends base_controller {
 			
 			# Build a Query
 			$q = "UPDATE users
-						SET password =  '".$_POST['password']."',
-						active = 1
-						WHERE email = '".$_POST['email']."'
-						AND token = '".$_POST['token']."'
-						AND active = 0
-						";
+				SET password =  '".$_POST['password']."',
+				active = 1
+				WHERE email = '".$_POST['email']."'
+				AND token = '".$_POST['token']."'
+				AND active = 0
+				";
 				
 			# Run the command
 			DB::instance(DB_NAME)->query($q);
@@ -503,19 +502,19 @@ class users_controller extends base_controller {
 			
 			# Retrieve the token if it's available
 			$q = "SELECT count(email)
-			FROM users
-			WHERE email = '".$_POST['email']."'
-			";
+				FROM users
+				WHERE email = '".$_POST['email']."'
+				";
 			
 			# Find Match
 			$all_match = DB::instance(DB_NAME)->select_field($q);
 			
 			# Retrieve the token if it's available
 			$q = "SELECT count(email)
-			FROM users
-			WHERE email = '".$_POST['email']."'
-			AND user_id = '".$this->user->user_id."'
-			";
+				FROM users
+				WHERE email = '".$_POST['email']."'
+				AND user_id = '".$this->user->user_id."'
+				";
 			
 			# Find Match
 			$user_match = DB::instance(DB_NAME)->select_field($q);
@@ -533,13 +532,13 @@ class users_controller extends base_controller {
 			
 				# Build a Query
 				$q = "UPDATE users
-						SET first_name =  '".$_POST['first_name']."',
-						last_name =  '".$_POST['last_name']."',
-						password =  '".$_POST['password']."',
-						email = '".$_POST['email']."',
-						modified = '".$_POST['modified']."'
-						WHERE user_id = '".$this->user->user_id."'
-						";
+					SET first_name =  '".$_POST['first_name']."',
+					last_name =  '".$_POST['last_name']."',
+					password =  '".$_POST['password']."',
+					email = '".$_POST['email']."',
+					modified = '".$_POST['modified']."'
+					WHERE user_id = '".$this->user->user_id."'
+					";
 					
 				# Run the command
 				DB::instance(DB_NAME)->query($q);
