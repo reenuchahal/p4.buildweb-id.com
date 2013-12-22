@@ -91,10 +91,8 @@ class network_controller extends base_controller {
 			FROM likes
 			WHERE user_id ='".$this->user->user_id."'
 				";
-	
 		# Store our results (an array) in the variable $connections
 		$likes = DB::instance(DB_NAME)->select_array($q, 'bookmark_id');
-
 
 		#Build the Query to count the number of likes for posts
 		$q = "SELECT bookmark_id, count(bookmark_id) as count
@@ -127,6 +125,7 @@ class network_controller extends base_controller {
 			WHERE email = '".$email."'
 			";
 		
+		# Store our results (an array) in the variable $profile
 		$profile= DB::instance(DB_NAME)->select_array($q, 'email');
 		
 		# Do the following, if search is set
@@ -149,7 +148,8 @@ class network_controller extends base_controller {
 		
 				$arr_q[$key] = " (a.title LIKE '%".$word."%' OR a.url LIKE '%".$word."%' OR a.notes LIKE '%".$word."%' ) ";
 			}
-		
+			
+			# Set Query
 			$q = "SELECT  a.title, a.url, a.notes, a.created, b.user_id, b.email, b.first_name, b.last_name
 				FROM user_bookmarks a, users b
 				WHERE a.user_id = b.user_id
@@ -174,7 +174,6 @@ class network_controller extends base_controller {
 			
 			# Run the command and store it as variable
 			$profile_links = DB::instance(DB_NAME)->select_rows($q);
-		
 		}
 		
 		# Set Query
@@ -183,6 +182,7 @@ class network_controller extends base_controller {
 			WHERE email = '".$email."'
 			";
 		
+		# Store our results in the variable $profile_user_id 
 		$profile_user_id = DB::instance(DB_NAME)->select_field($q);
 		
 		
