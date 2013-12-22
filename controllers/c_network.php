@@ -117,6 +117,29 @@ class network_controller extends base_controller {
 	
 	} # End of method
 	
+	public function addLink($bookmark_id_add) {
+		
+		# Set Query to get bookMarks for the logged In use
+		$q = "SELECT * FROM user_bookmarks
+					WHERE bookmark_id = '".$bookmark_id_add."'
+					";
+		
+		# Run the command and store it as variable
+		$bookmark = DB::instance(DB_NAME)->select_rows($q );
+		
+		# add this css in head
+		$this->template->client_files_head = '<link rel="stylesheet" href="/css/footer-hide.css" type="text/css">';
+		
+		# Set the view and variables
+		$this->template->content = View::instance('v_network_addLink');
+		$this->template->title = "Add Link";
+		$this->template->content->bookmark = $bookmark;
+		
+		# Render the template
+		echo $this->template;
+		
+	} # End of method
+	
 	public function profile($email) {
 		
 		# Set Query
@@ -150,7 +173,7 @@ class network_controller extends base_controller {
 			}
 			
 			# Set Query
-			$q = "SELECT  a.title, a.url, a.notes, a.created, b.user_id, b.email, b.first_name, b.last_name
+			$q = "SELECT  a.bookmark_id, a.title, a.url, a.notes, a.created, b.user_id, b.email, b.first_name, b.last_name
 				FROM user_bookmarks a, users b
 				WHERE a.user_id = b.user_id
 				AND b.email = '".$email."'
@@ -159,13 +182,13 @@ class network_controller extends base_controller {
 				";
 			
 			# Run the command and store it as variable
-			$profile_links = DB::instance(DB_NAME)->select_rows($q);
+			$bookmarks = DB::instance(DB_NAME)->select_rows($q);
 
 		# Do the following, if search is not set
 		} else {
 			
 			# Set Query to get bookMarks for the profile user
-			$q = "SELECT  a.title, a.url, a.notes, a.created, b.user_id, b.email, b.first_name, b.last_name
+			$q = "SELECT a.bookmark_id, a.title, a.url, a.notes, a.created, b.user_id, b.email, b.first_name, b.last_name
 				FROM user_bookmarks a, users b
 				WHERE a.user_id = b.user_id
 				AND b.email = '".$email."'
@@ -173,7 +196,7 @@ class network_controller extends base_controller {
 				";
 			
 			# Run the command and store it as variable
-			$profile_links = DB::instance(DB_NAME)->select_rows($q);
+			$bookmarks = DB::instance(DB_NAME)->select_rows($q);
 		}
 		
 		# Set Query
@@ -211,7 +234,7 @@ class network_controller extends base_controller {
 		# Setup Variables
 		$this->template->content->email = $email;
 		$this->template->content->profile = $profile;
-		$this->template->content->profile_links = $profile_links;
+		$this->template->content->bookmarks = $bookmarks;
 		$this->template->content->connections = $connections;
 		$this->template->content->follower = $follower;
 		

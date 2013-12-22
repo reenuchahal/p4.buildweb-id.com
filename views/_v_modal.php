@@ -10,18 +10,18 @@
 							
 					<!-- URL input -->
 					<label for="url">URL</label>
-					<input class="form-control" size="50" placeholder="url" id="url" type="text" name="url" required><br/>
-					<p id="urlError"></p>
+					<input class="form-control" size="50"  placeholder="url" id="url" type="text" name="url" required><br/>
+					<p class="urlError"></p>
 					
 					<!-- Title input -->
 					<label for="title">Title</label>
 					<input class="form-control" size="50" placeholder="title" id="title" type="text" name="title" required><br/>
-					<p id="titleError"></p>
+					<p class="titleError"></p>
 					
 					<!-- Comment Textarea -->
 					<label for='notes'>Comment</label><br>
 					<textarea class="form-control" rows="3" name='notes' id='notes' placeholder="What's your comment?" required></textarea><br/>
-					<p id="notesError"></p>
+					<p class="notesError"></p>
 				 
 					<div class="text-right">
 						<button  type="submit" class="btn btn-primary">Add Link</button>
@@ -34,7 +34,6 @@
 		</div><!-- /.modal-content -->
 	</div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
-
 
 
 

@@ -88,43 +88,14 @@
 					 	<img src="/uploads/Facebook-Thumbs-Up.jpg" alt="facebook thumbs up"/> (<?php echo $count[$bookmark['bookmark_id']]['count'] ?>)
 					<?php endif; ?>
 					
-					<a data-toggle="modal" data-target="#myModalAddLink"  class="btn btn-default btn-xs" >Add Link</a>
+					<a data-toggle="modal" data-target="#myModalAddLink"  class="btn btn-default btn-xs" href="/network/addLink/<?=$bookmark['bookmark_id']?>" >Add Link</a>
 				</div><!-- / .text-right -->
 			</div> <!-- / .feed-display -->
-
-			<!-- Modal Add Link
-			=========================================== -->
-			<div class="modal fade" id="myModalAddLink" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-				<div class="modal-dialog">
-					<div class="modal-content">
-						<div class="modal-body">
-							<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-							<form method="post" action="/bookmarks/p_add" id="addLink">
-							
-								<!-- URL input -->
-								<label for="url">URL</label>
-								<input class="form-control" size="50" value="<?=$bookmark['url']?>" placeholder="url" id="url" type="text" name="url" required><br/>
-								<p id="urlError"></p>
-								
-								<!-- Title input -->
-								<label for="title">Title</label>
-								<input class="form-control" size="50" placeholder="title" id="title" type="text" name="title" required><br/>
-								<p id="titleError"></p>
-								
-								<!-- Comment Textarea -->
-								<label for='notes'>Comment</label><br>
-								<textarea class="form-control" rows="3" name='notes' id='notes' placeholder="What's your comment?" required></textarea><br/>
-								<p id="notesError"></p>
-											 
-								<div class="text-right">
-									<button  type="submit" class="btn btn-success btn-sm"">Add Link</button>&nbsp;&nbsp;<a class="btn btn-default btn-sm" data-dismiss="modal" aria-hidden="true">Cancel</a>
-								</div>
-							</form>
-						</div>
-					</div><!-- /.modal-content -->
-				</div><!-- /.modal-dialog -->
-			</div><!-- /.modal -->
-					
 		<?php endforeach;?>
 	</div> <!-- / .col-md-offset-2 .col-xs-12 .col-sm-10 .col-md-8 -->
 </div> <!-- / .row -->
+
+<!-- Modal Add Link
+=========================================== -->
+<div class="modal fade" id="myModalAddLink" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+</div><!-- /.modal -->

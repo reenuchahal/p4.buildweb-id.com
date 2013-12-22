@@ -138,6 +138,31 @@ class bookmarks_controller extends base_controller {
 	
 	} # End of method
 	
+	public function edit_form($bookmark_id_edit){
+		
+		# Set Query to get bookMarks for the logged In use
+		$q = "SELECT * FROM user_bookmarks
+					WHERE user_id = '".$this->user->user_id."'
+					AND bookmark_id = '".$bookmark_id_edit."'
+					ORDER BY created desc
+					";
+		
+		# Run the command and store it as variable
+		$bookmark = DB::instance(DB_NAME)->select_rows($q );
+		
+		# add this css in head
+		$this->template->client_files_head = '<link rel="stylesheet" href="/css/footer-hide.css" type="text/css">';
+		
+		# Set the view and variables
+		$this->template->content = View::instance('v_bookmark_edit');
+		$this->template->title = "Edit Link";
+		$this->template->content->bookmark = $bookmark;
+		
+		# Render the template
+		echo $this->template;
+		
+	} # End of method
+	
 	public function edit($bookmark_id_edit){
 		
 	    # Prevent SQL injection attacks by sanitizing the data the user entered in the form
@@ -154,18 +179,12 @@ class bookmarks_controller extends base_controller {
 		#Unic timestamp of when this posts was created and modified
 		$_POST['modified'] = Time::now();
 
-		#Build the Query
-		$q = "UPDATE user_bookmarks
-			SET url = '".$_POST['url']."',
-			title = '".$_POST['title']."',
-			notes = '".$_POST['notes']."',
-			modified = '".Time::now()."'
-			WHERE bookmark_id = '".$bookmark_id_edit."'
-			";
-		 
-		# Run the command
-		DB::instance(DB_NAME)->query($q);
-
+		# update this connection
+		$where_condition = 'WHERE bookmark_id = '.$bookmark_id_edit;
+		
+		
+		DB::instance(DB_NAME)->update("user_bookmarks", $_POST, $where_condition );
+		
 		# Route to profile page
 		Router::redirect("/bookmarks/myLinks");
 	

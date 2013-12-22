@@ -16,7 +16,7 @@
 		
 			<!-- No Profile Links 
 			================================== -->
-			<?php if(count($profile_links) == 0): ?>
+			<?php if(count($bookmarks) == 0): ?>
 				
 				<!-- Search Is set show search bar for zero links
 				================================== -->
@@ -35,7 +35,7 @@
 						<small><?php echo $profile[$email]['email'];?></small>
 					</h1>
 					<p>
-						<b><?=count($profile_links);?></b> <small>links</small>&nbsp;&nbsp;
+						<b><?=count($bookmarks);?></b> <small>links</small>&nbsp;&nbsp;
 						<b><?php echo (count($connections));?></b> <small>following</small>&nbsp;&nbsp; 
 						<b><?php echo (count($follower));?></b> <small>follower</small> 
 					</p><br/>
@@ -71,7 +71,7 @@
 		
 			<!-- There is one or more than one links, Display this.
 			================================== -->
-			<?php if(count($profile_links) > 0): ?>
+			<?php if(count($bookmarks) > 0): ?>
 				<div class="pull-right">
 					<form method="post" action="/network/profile/<?=$profile[$email]['email'];?>">
 						<input type="text" name="search" id="search" placeholder="Search Keywords" />
@@ -84,7 +84,7 @@
 						<small><?php echo $profile[$email]['email'];?></small>
 					</h1>
 					<p>
-						<b><?=count($profile_links);?></b> <small>links</small>&nbsp;&nbsp;
+						<b><?=count($bookmarks);?></b> <small>links</small>&nbsp;&nbsp;
 						<b><?php echo (count($connections));?></b> <small>following</small>&nbsp;&nbsp; 
 						<b><?php echo (count($follower));?></b> <small>follower</small> 
 					</p><br/>
@@ -101,64 +101,35 @@
 		
 			<!-- Show Links 
 			=========================================== -->
-			<?php foreach($profile_links as $profile_link): ?>
+			<?php foreach($bookmarks as $bookmark): ?>
 			
 				<!-- Remove http:// and end slash from url
 				================================== -->
-				<?php $url_print = $profile_link['url'];
+				<?php $url_print = $bookmark['url'];
 					$url_print = str_replace(array('http://','https://','www.'), '', $url_print);
 					$url_print = rtrim($url_print, "/");
 				?>
 				
 				<div class="feed-profile-display">
-					<h4><a href="<?=$profile_link['url']?>" target="_blank"><?=$profile_link['title']?> <span class="url-print"><?=$url_print;?></a></h4>
+					<h4><a href="<?=$bookmark['url']?>" target="_blank"><?=$bookmark['title']?> <span class="url-print"><?=$url_print;?></a></h4>
 					<blockquote>
-						<p><?=$profile_link['notes']?></p>
-						<time datetime="<?=Time::display($profile_link['created'],'Y-m-d')?>">
-							<?=Time::display($profile_link['created'],'Y-m-d g:i a')?>
+						<p><?=$bookmark['notes']?></p>
+						<time datetime="<?=Time::display($bookmark['created'],'Y-m-d')?>">
+							<?=Time::display($bookmark['created'],'Y-m-d g:i a')?>
 						</time>
 					</blockquote>
 					
 					<div class="text-right delete-btn">
-						<a data-toggle="modal" data-target="#myModalAddLink"  class="btn btn-default btn-sm" >Add Link</a>
+						<a data-toggle="modal" data-target="#myModalAddLink"  class="btn btn-default btn-sm" href="/network/addLink/<?=$bookmark['bookmark_id']?>">Add Link</a>
 					</div>		
 				</div> <!-- / .feed-display -->
-					
-				<!-- Modal Add Link
-				 =========================================== -->
-				<div class="modal fade" id="myModalAddLink" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-					<div class="modal-dialog">
-						<div class="modal-content">
-							<div class="modal-body">
-								<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-								<form method="post" action="/bookmarks/p_add" id="addLink">
-								
-									<!-- URL input -->
-									<label for="url">URL</label>
-									<input class="form-control" size="50" value="<?=$profile_link['url']?>" placeholder="url" id="url" type="text" name="url" required><br/>
-									<p id="urlError"></p>
-									
-									<!-- Title input -->
-									<label for="title">Title</label>
-									<input class="form-control" size="50" placeholder="title" id="title" type="text" name="title" required><br/>
-									<p id="titleError"></p>
-									
-									<!-- Comment Textarea -->
-									<label for='notes'>Comment</label><br>
-									<textarea class="form-control" rows="3" name='notes' id='notes' placeholder="What's your comment?" required></textarea><br/>
-									<p id="notesError"></p>
-												 
-									<div class="text-right">
-										<button  type="submit" class="btn btn-success btn-sm"">Add Link</button>&nbsp;&nbsp;<a class="btn btn-default btn-sm" data-dismiss="modal" aria-hidden="true">Cancel</a>
-									</div>
-								</form>
-							</div>
-						</div><!-- /.modal-content -->
-					</div><!-- /.modal-dialog -->
-				</div><!-- /.modal -->
-				
 			<?php endforeach;?>
 		</div><!-- /.col-md-offset-2 .col-xs-12 .col-sm-10 .col-md-8 -->
 	</div><!-- / .row -->	
 <?php endif; ?>
+
+<!-- Modal Add Link
+ =========================================== -->
+<div class="modal fade" id="myModalAddLink" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+</div><!-- /.modal -->
 
