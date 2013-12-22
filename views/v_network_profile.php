@@ -32,11 +32,14 @@
 				
 				<div class="feed-danger-display">
 					<h1><?php echo $profile[$email]['first_name'];?> <?php echo $profile[$email]['last_name'];?><br/>
-					<small><?php echo $profile[$email]['email'];?></small>
+						<small><?php echo $profile[$email]['email'];?></small>
 					</h1>
-					<p><b><?=count($profile_links);?></b> <small>links</small>&nbsp;&nbsp;
-					<b><?php echo (count($connections));?></b> <small>following</small>&nbsp;&nbsp; 
-					<b><?php echo (count($follower));?></b> <small>follower</small> </p> <br/>
+					<p>
+						<b><?=count($profile_links);?></b> <small>links</small>&nbsp;&nbsp;
+						<b><?php echo (count($connections));?></b> <small>following</small>&nbsp;&nbsp; 
+						<b><?php echo (count($follower));?></b> <small>follower</small> 
+					</p><br/>
+					
 					<div class="pull-right">
 						<p><a href="/users/findfriends"> &#171; Go back to Connections</a></p>
 					</div>
@@ -78,14 +81,18 @@
 				</div>
 				<div class="profile-display">
 					<h1><?php echo $profile[$email]['first_name'];?> <?php echo $profile[$email]['last_name'];?><br/>
-					<small><?php echo $profile[$email]['email'];?></small>
+						<small><?php echo $profile[$email]['email'];?></small>
 					</h1>
-					<p><b><?=count($profile_links);?></b> <small>links</small>&nbsp;&nbsp;
-					<b><?php echo (count($connections));?></b> <small>following</small>&nbsp;&nbsp; 
-					<b><?php echo (count($follower));?></b> <small>follower</small> </p> <br/>
+					<p>
+						<b><?=count($profile_links);?></b> <small>links</small>&nbsp;&nbsp;
+						<b><?php echo (count($connections));?></b> <small>following</small>&nbsp;&nbsp; 
+						<b><?php echo (count($follower));?></b> <small>follower</small> 
+					</p><br/>
+					
 					<div class="pull-right">
 						<p><a href="/users/findfriends"> &#171; Go back to Connections</a></p>
 					</div>
+					
 					<div class="pull-left">
 						<p><a href="/network/profile/<?=$profile[$email]['email'];?>">Show all</a></p>
 					</div>
