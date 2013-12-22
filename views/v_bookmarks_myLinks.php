@@ -5,9 +5,11 @@
 		=========================================== -->
 		<?php if(count($bookmarks) == 0 & !isset($_POST['search'])): ?>
 			<h1><?=$user->first_name;?> <?=$user->last_name;?></h1>
-			<p><b><?=count($bookmarks);?></b> <small>links</small>&nbsp;&nbsp;
-			<b><?php echo (count($connections));?></b> <small>following</small>&nbsp;&nbsp; 
-			<b><?php echo (count($follower));?></b> <small>follower</small> </p> 
+			<p>
+				<b><?=count($bookmarks);?></b> <small>links</small>&nbsp;&nbsp;
+				<b><?php echo (count($connections));?></b> <small>following</small>&nbsp;&nbsp; 
+				<b><?php echo (count($follower));?></b> <small>follower</small> 
+			</p> 
 			<br/>
 		<?php endif; ?>
 		
@@ -26,9 +28,11 @@
 			<!-- LoggedIn User INFO
 			=========================================== -->
 			<h1><?=$user->first_name;?> <?=$user->last_name;?></h1>
-			<p><b><?=count($bookmarks);?></b> <small>links</small>&nbsp;&nbsp;
-			<b><?php echo (count($connections));?></b> <small>following</small>&nbsp;&nbsp; 
-			<b><?php echo (count($follower));?></b> <small>follower</small> </p> 
+			<p>
+				<b><?=count($bookmarks);?></b> <small>links</small>&nbsp;&nbsp;
+				<b><?php echo (count($connections));?></b> <small>following</small>&nbsp;&nbsp; 
+				<b><?php echo (count($follower));?></b> <small>follower</small> 
+			</p> 
 			<br/>
 			
 			<div class="pull-right">
@@ -72,6 +76,7 @@
 		=========================================== -->
 		<?php foreach($bookmarks as $bookmark): ?>
 		
+			<!-- Remove url http:// and end slash -->
 			<?php $url_print = $bookmark['url'];
 				$url_print = str_replace(array('http://','https://','www.'), '', $url_print);
 				$url_print = rtrim($url_print, "/");
