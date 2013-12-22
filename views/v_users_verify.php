@@ -1,3 +1,4 @@
+<!-- No error set -->
 <?php if(!isset($error1) & !isset($error2)): ?>
 	<div class="row">
 		<div class="col-md-offset-1 col-xs-12 col-sm-12 col-md-10 bs-callout-warning">
@@ -9,6 +10,8 @@
 		</div>
 	</div>
 <?php endif; ?>
+
+<!-- error1 set and error2 not set -->
 <?php if(isset($error1) & !isset($error2)): ?>
 	<div class="row">
 		<div class="col-md-offset-1 col-xs-12 col-sm-12 col-md-10 bs-callout-danger">
@@ -16,6 +19,8 @@
 		</div>
 	</div><br/>
 <?php endif; ?>
+
+<!-- error 2 set -->
 <?php if(isset($error1) & isset($error2)): ?>
 	<div class="row">
 		<div class="col-md-offset-1 col-xs-12 col-sm-12 col-md-10 bs-callout-danger">
