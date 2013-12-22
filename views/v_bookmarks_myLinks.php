@@ -65,8 +65,9 @@
 					<h4>No Match Found!!!</h4>
 					<blockquote>
 						<p>Refine your search. 
-							TIPS: Use key words to search. 
-							You can search by Link's Title, URL or Description.</p>
+						TIPS: Use key words to search. 
+						You can search by Link's Title, URL or Description.
+						</p>
 					</blockquote>
 				</div>
 			<?php endif; ?>
