@@ -11,7 +11,8 @@ class network_controller extends base_controller {
 			# Route to login Page
 			Router::redirect("/users/login/");
 		}
-	}
+		
+	} # End of method
 	
 	public function links() {
 		
@@ -115,7 +116,8 @@ class network_controller extends base_controller {
 
 		# Render the view
 		echo $this->template;
-	}
+	
+	} # End of method
 	
 	public function profile($email) {
 		
@@ -164,11 +166,11 @@ class network_controller extends base_controller {
 			
 			# Set Query to get bookMarks for the profile user
 			$q = "SELECT  a.title, a.url, a.notes, a.created, b.user_id, b.email, b.first_name, b.last_name
-					FROM user_bookmarks a, users b
-					WHERE a.user_id = b.user_id
-					AND b.email = '".$email."'
-					ORDER BY a.created desc
-					";
+				FROM user_bookmarks a, users b
+				WHERE a.user_id = b.user_id
+				AND b.email = '".$email."'
+				ORDER BY a.created desc
+				";
 			
 			# Run the command and store it as variable
 			$profile_links = DB::instance(DB_NAME)->select_rows($q);
@@ -186,9 +188,9 @@ class network_controller extends base_controller {
 		
 		# Whom profile user following
 		$q = "SELECT *
-				From users_users
-				WHERE user_id = '".$profile_user_id."'
-				";
+			From users_users
+			WHERE user_id = '".$profile_user_id."'
+			";
 			
 		# Store our results (an array) in the variable $connections
 		$connections = DB::instance(DB_NAME)->select_array($q, 'user_id_followed');
@@ -215,7 +217,8 @@ class network_controller extends base_controller {
 		
 		# Render the template
 		echo $this->template;
-	}
+	
+	} # End of method
 	
 	public function like($bookmark_id_like) {
 	
@@ -232,7 +235,8 @@ class network_controller extends base_controller {
 	
 		# Send them back
 		Router::redirect("/network/links");
-	}
+	
+	} # End of method
 	
 	public function unlike($bookmark_id_like) {
 	
@@ -242,5 +246,7 @@ class network_controller extends base_controller {
 
 		# Send them back
 		Router::redirect("/network/links");
-	}
-}
+	
+	} # End of method
+
+} # End of class

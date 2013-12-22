@@ -3,13 +3,15 @@ class users_controller extends base_controller {
 	
 	public function __construct() {
 		parent::__construct();
-	}
+	
+	} # End of method
 	
 	public function index() {
 		
 		# Route to @connection page
 		Router::redirect("/users/findfriends/");
-	}
+	
+	} # End of method
 	
 	public function signup($error = NULL) {
 		
@@ -31,7 +33,8 @@ class users_controller extends base_controller {
 		
 		# Render View
 		echo $this->template;
-	}
+	
+	} # End of method
 	
 	public function p_signup() {
 		
@@ -97,7 +100,8 @@ class users_controller extends base_controller {
 			# Route to login Page
 			Router::redirect("/users/signup_result/");
 		}
-	}
+	
+	} # End of method
 	
 	public function signup_result($error1 = NULL, $error2 = NULL) {
 		
@@ -122,7 +126,8 @@ class users_controller extends base_controller {
 		
 		# Render View
 		echo $this->template;
-	}
+	
+	} # End of method
 	
 	public function verify($email= NULL,$token = NULL ) {
 			
@@ -167,7 +172,8 @@ class users_controller extends base_controller {
 				Router::redirect("/users/signup_result/match/error");
 			}
 		}
-	}
+	
+	} # End of method
 	
 	public function login($loginMessage = NULL, $error = NULL ) {
 		
@@ -193,8 +199,8 @@ class users_controller extends base_controller {
 		
 		# Render View
 		echo $this->template;
-	}
 	
+	} # End of method
 	
 	public function p_login() {
 		
@@ -232,7 +238,8 @@ class users_controller extends base_controller {
 			#Send them to the main page
 			Router::redirect("/bookmarks/myLinks");
 		}
-	}
+	
+	} # End of method
 	
 	public function forgot_password($error = NULL, $email = NULL) {
 	
@@ -257,8 +264,8 @@ class users_controller extends base_controller {
 
 		# Render View
 		echo $this->template;
-	}
 	
+	} # End of method
 	
 	public function p_forgot_password() {
 		
@@ -307,7 +314,8 @@ class users_controller extends base_controller {
 			# Route to login Page
 			Router::redirect("/users/recover_password_result/");
 		}
-	}
+	
+	} # End of method
 	
 	public function recover_password_result($success= NULL, $error1 = NULL, $error2 = NULL) {
 	
@@ -335,7 +343,8 @@ class users_controller extends base_controller {
 
 		# Render View
 		echo $this->template;
-	}
+	
+	} # End of method
 	
 	public function reset_password($email = NULL, $token = NULL) {
 	
@@ -360,7 +369,8 @@ class users_controller extends base_controller {
 	
 		# Render View
 		echo $this->template;
-	}
+	
+	} # End of method
 	
 	public function p_reset_password() {
 		
@@ -385,8 +395,7 @@ class users_controller extends base_controller {
 	
 		# Find Match
 		$match = DB::instance(DB_NAME)->select_field($q);
-			
-			 
+		
 		if($match > 0) {
 		
 			# Sanitize the user entered data
@@ -416,7 +425,8 @@ class users_controller extends base_controller {
 			# Route to login Page
 			Router::redirect("/users/recover_password_result/result/match/error");
 		}	
-	}
+	
+	} # End of method
 	
 	public function logout() {
 	
@@ -435,7 +445,8 @@ class users_controller extends base_controller {
 	
 	    # Send them back to the main index.
 	    Router::redirect("/");
-	}
+	
+	} # End of method
 	
 	public function profile($error = NULL, $unique_email_error = null) {
 		
@@ -466,7 +477,8 @@ class users_controller extends base_controller {
 		
 		# Render View
 		echo $this->template;
-	}
+	
+	} # End of method
 	
 	public function p_profileEdit(){
 		
@@ -543,7 +555,8 @@ class users_controller extends base_controller {
 				
 			} 
 		}
-	}
+	
+	} # End of method
 	
 	public function p_profile() {
 		
@@ -587,7 +600,8 @@ class users_controller extends base_controller {
 			# Route to profile page's Error
 			Router::redirect("/users/profile/error");
 		}
-	}
+	
+	} # End of method
 	
 	public function findfriends() {
 		
@@ -631,8 +645,8 @@ class users_controller extends base_controller {
 			
 				# Build the query
 				$q = "SELECT *
-				FROM users
-				"; 
+					FROM users
+					"; 
 				
 				# Run the query
 				$users = DB::instance(DB_NAME)->select_rows($q);
@@ -640,9 +654,9 @@ class users_controller extends base_controller {
 				
 			# Who are they following
 			$q = "SELECT *
-			From users_users
-			WHERE user_id = '".$this->user->user_id."'
-			";
+				From users_users
+				WHERE user_id = '".$this->user->user_id."'
+				";
 	
 			# Store our results (an array) in the variable $connections
 			$connections = DB::instance(DB_NAME)->select_array($q, 'user_id_followed');
@@ -658,7 +672,8 @@ class users_controller extends base_controller {
 			# Render the View
 			echo $this->template;
 		}
-	}
+		
+	} # End of method
 	
 	public function follow($user_id_followed) {
 	
@@ -674,7 +689,8 @@ class users_controller extends base_controller {
 	
 		# Send them back
 		Router::redirect("/users/findfriends");
-	}
+	
+	} # End of method
 	
 	public function unfollow($user_id_followed) {
 	
@@ -684,6 +700,7 @@ class users_controller extends base_controller {
 	
 			# Send them back
 			Router::redirect("/users/findfriends");
-	}
 	
-}
+	} # End of method
+	
+} # End of class
