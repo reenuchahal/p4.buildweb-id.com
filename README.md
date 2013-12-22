@@ -37,7 +37,7 @@ Other Features:<br/>
  
  Account for Instructor:<br/>
  When you register for website and don't receive email in 10 minutes, please check your spam or junk for verification email.
- I have created a blank account for instructor to check website features, in case registration failed (Although it should not.).<br/>
+ I have created a blank account for instructor to check website features, in case registration fails (Although it should not [cross fingers]).<br/>
  
  email: user@test.com<br/>
  password:12345<br/>
