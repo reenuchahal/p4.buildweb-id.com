@@ -7,13 +7,16 @@
 		<!-- Default Image -->
 		<?php else: ?>
 			<img  class="img-responsive img-thumbnail" alt="placeholder_image" src="/uploads/placeholder_200_200.png" /><br/><br/>
+		
 		<?php endif; ?>
 	</div><!-- / .col-md-offset-1 .col-xs-12 .col-sm-5 .col-md-5 -->
 	
 	<div class="col-md-offset-1 col-sm-offset-1 col-xs-6 col-sm-5 col-md-4" >
-	
+		
+		<!-- Heading -->
 		<h1>Your Profile</h1><br/>
 		
+		<!-- Profile Display -->
 		<div id="profileInfo" class="show">
 			<p>
 				<b>Name:</b> <?=$user->first_name?>  <?=$user->last_name?><br/>
@@ -28,6 +31,7 @@
 			<?php endif; ?> 
 		</div>
 	
+		<!-- Profile Edit form -->
 		<div id="profileInfoEdit" class="hidden">
 			<form method="POST" action="/users/p_profileEdit" id="registrationForm">
 	
@@ -54,17 +58,19 @@
 				<button type="submit" class="btn btn-success" id="profileEditSave">Save</button>
 				<a class="btn btn-danger" id="profileEditCancel">Cancel</a>
 		
-			</form>
-			<br/><br/>
+			</form><br/><br/>
 		</div>
 		
+		<!-- Button Show Profile Edit form -->
 		<button class="btn btn-warning show" id="profileEdit">Edit Profile</button><br/>
 		
+		<!-- Current Location of the USER -->
 		<p>
 			<b>Your Current Location </b><br/>
 			<?=$location['city'];?>, <?=$location['state'];?>, <?=$location['country_code'];?>
 		</p><br/>
-			
+		
+		<!-- Form to upload an image -->	
 		<form enctype="multipart/form-data" method="POST" action="/users/p_profile">
 			<!-- Upload Image Here -->
 			<label for="imageInputFile">Upload your profile image here</label>
