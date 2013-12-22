@@ -10,6 +10,7 @@
 			<input type="hidden" value="<?php echo $token ?>" name="token">
 			
 			<button type="submit" class="btn btn-default">Reset Password</button> 
+		
 		</div><!-- /.col-md-offset-1 .col-xs-8 .col-sm-6 .col-md-4 -->
 	</form>
 </div><!-- / .row -->
