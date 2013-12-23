@@ -11,7 +11,7 @@
 				discover interesting links on the web. 
 				Instantly save what's most important to you. 
 				Connect to others to checkout what they have saved.</p>
-			<p> On Web BookMark, you can save your favorite links. You can checkout other's links and add their links to your list. You can follow the users for their every day updates. </p>
+			<p> On Web BookMark, you can save your favorite links. You can check other's links and add their links to your list. You can follow the users for their every day updates. </p>
 			<h3>
 				<a href="/users/signup">Sign up for <span class="glyphicon glyphicon-bookmark"></span>Web BookMark</a>. 
 			</h3>
