@@ -139,7 +139,7 @@ class bookmarks_controller extends base_controller {
 	
 	} # End of method
 	
-	public function edit_form($bookmark_id_edit = NULL){
+	public function edit($bookmark_id_edit = NULL){
 		
 		# Set Query to get bookMarks for the logged In use
 		$q = "SELECT * FROM user_bookmarks
@@ -168,7 +168,7 @@ class bookmarks_controller extends base_controller {
 	
 	} # End of method
 	
-	public function edit($bookmark_id_edit = NULL){
+	public function p_edit($bookmark_id_edit = NULL){
 		
 		if (!isset($bookmark_id_edit )) {
 		

@@ -5,7 +5,7 @@
 			<h4>Edit BookMark</h4>
 		</div>
 		<div class="modal-body">
-			<form method="post" action="/bookmarks/edit/<?php if(isset ($bookmark[0]['bookmark_id'])): ?><?=$bookmark[0]['bookmark_id']?><?php endif;?>" id="addLink">
+			<form method="post" action="/bookmarks/p_edit/<?php if(isset ($bookmark[0]['bookmark_id'])): ?><?=$bookmark[0]['bookmark_id']?><?php endif;?>" id="addLink">
 			
 				<!-- URL input -->
 				<label for="url">URL</label>

@@ -100,7 +100,7 @@
 				
 				<div class="text-right delete-btn">
 					<a  class="btn btn-danger btn-sm" href="/bookmarks/delete/<?=$bookmark['bookmark_id']?>" onclick="return confirm('Are you sure to delete this link?');">Delete</a>
-					<a class="btn btn-default btn-sm" href='/bookmarks/edit_form/<?=$bookmark['bookmark_id']?>'>Edit</a>
+					<a class="btn btn-default btn-sm" href='/bookmarks/edit/<?=$bookmark['bookmark_id']?>'>Edit</a>
 				</div>		
 			</div> <!-- / .feed-display -->
 		<?php endforeach;?>
