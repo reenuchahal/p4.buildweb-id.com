@@ -1,3 +1,11 @@
+<!-- No user has been defined
+================================== -->
+<?php if(!isset($email)):?>
+<div class="feed-danger-display">
+		<h4>No User has been defined.</h4>
+</div>
+<?php endif;?>
+
 <!-- Email does not exist
 ================================== -->
 <?php if(count($profile) == 0): ?>
@@ -120,7 +128,7 @@
 					</blockquote>
 					
 					<div class="text-right delete-btn">
-						<a data-toggle="modal" data-target="#myModalAddLink"  class="btn btn-default btn-sm" href="/network/addLink/<?=$bookmark['bookmark_id']?>">Add Link</a>
+						<a  class="btn btn-default btn-sm" href="/network/addLinkProfile/<?=$bookmark['bookmark_id']?>">Add Link</a>
 					</div>		
 				</div> <!-- / .feed-display -->
 			<?php endforeach;?>

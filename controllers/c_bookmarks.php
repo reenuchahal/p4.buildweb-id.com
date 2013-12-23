@@ -49,7 +49,7 @@ class bookmarks_controller extends base_controller {
 	
 	} # End of method
 	
-	public function myLinks() {
+	public function myLinks($error = NULL) {
 		
 		# Do the following, if search is set
 		if(isset($_POST['search'])){
@@ -119,6 +119,7 @@ class bookmarks_controller extends base_controller {
 		$this->template->title = "My Links";
 		$this->template->content->bookmarks = $bookmarks;
 		$this->template->content->connections = $connections;
+		$this->template->content->error = $error;
 		$this->template->content->follower = $follower;
 		
 		# Render the template
@@ -138,7 +139,7 @@ class bookmarks_controller extends base_controller {
 	
 	} # End of method
 	
-	public function edit_form($bookmark_id_edit){
+	public function edit_form($bookmark_id_edit = NULL){
 		
 		# Set Query to get bookMarks for the logged In use
 		$q = "SELECT * FROM user_bookmarks
@@ -150,9 +151,6 @@ class bookmarks_controller extends base_controller {
 		# Run the command and store it as variable
 		$bookmark = DB::instance(DB_NAME)->select_rows($q );
 		
-		# add this css in head
-		$this->template->client_files_head = '<link rel="stylesheet" href="/css/footer-hide.css" type="text/css">';
-		
 		# Set the view and variables
 		$this->template->content = View::instance('v_bookmark_edit');
 		$this->template->title = "Edit Link";
@@ -163,30 +161,46 @@ class bookmarks_controller extends base_controller {
 		
 	} # End of method
 	
-	public function edit($bookmark_id_edit){
+	public function cancelEdit() {
 		
-	    # Prevent SQL injection attacks by sanitizing the data the user entered in the form
-		$_POST = DB::instance(DB_NAME)->sanitize($_POST);
-		
-		#function to remove space
-		function trim_value(&$value) {
-			$value = trim($value);
-		}
-		
-		#remove space
-		array_walk($_POST, 'trim_value');
-		
-		#Unic timestamp of when this posts was created and modified
-		$_POST['modified'] = Time::now();
-
-		# update this connection
-		$where_condition = 'WHERE bookmark_id = '.$bookmark_id_edit;
-		
-		
-		DB::instance(DB_NAME)->update("user_bookmarks", $_POST, $where_condition );
-		
-		# Route to profile page
+		# Send them back
 		Router::redirect("/bookmarks/myLinks");
+	
+	} # End of method
+	
+	public function edit($bookmark_id_edit = NULL){
+		
+		if (!isset($bookmark_id_edit )) {
+		
+			# Send them back
+			Router::redirect("/bookmarks/myLinks/error");
+			
+		} else {
+			
+			# Prevent SQL injection attacks by sanitizing the data the user entered in the form
+			$_POST = DB::instance(DB_NAME)->sanitize($_POST);
+			
+			#function to remove space
+			function trim_value(&$value) {
+				$value = trim($value);
+			}
+			
+			#remove space
+			array_walk($_POST, 'trim_value');
+			
+			#Unic timestamp of when this posts was created and modified
+			$_POST['modified'] = Time::now();
+	
+			# update this connection
+			$where_condition = 'WHERE bookmark_id = '.$bookmark_id_edit;
+			
+			
+			DB::instance(DB_NAME)->update("user_bookmarks", $_POST, $where_condition );
+			
+			# Route to profile page
+			Router::redirect("/bookmarks/myLinks");
+		
+		}
 	
 	} # End of method
 

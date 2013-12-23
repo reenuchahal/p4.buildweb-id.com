@@ -280,6 +280,3 @@ $("#profileEditCancel").click(function() {
 	
 });
 
-$(".cancel").click(function(){
-	parent.window.location.reload(true);
-});

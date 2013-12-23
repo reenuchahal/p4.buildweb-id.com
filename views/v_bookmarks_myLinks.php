@@ -1,5 +1,11 @@
 <div class="row">
 	<div class="col-md-offset-2 col-xs-12 col-sm-10 col-md-8">
+		
+		<?php if(isset($error)):?>
+			<div class="feed-danger-display">
+				<h4>BookMark is not defined correctly. <a data-toggle="modal" data-target="#myModal" href="#">+ Add new Link</a></h4>
+			</div>
+		<?php endif;?>
 	
 		<!-- Show if there is no pook marks and search is not set
 		=========================================== -->
@@ -94,14 +100,14 @@
 				
 				<div class="text-right delete-btn">
 					<a  class="btn btn-danger btn-sm" href="/bookmarks/delete/<?=$bookmark['bookmark_id']?>" onclick="return confirm('Are you sure to delete this link?');">Delete</a>
-					<a class="btn btn-default btn-sm"  href='/bookmarks/edit_form/<?=$bookmark['bookmark_id']?>'>Edit</a>
+					<a class="btn btn-default btn-sm" href='/bookmarks/edit_form/<?=$bookmark['bookmark_id']?>'>Edit</a>
 				</div>		
 			</div> <!-- / .feed-display -->
 		<?php endforeach;?>
+		
 	</div> <!-- / .col-md-offset-2 .col-xs-12 .col-sm-10 .col-md-8 -->
 </div> <!-- / .row -->
-<div class="modal fade" id="myModalEdit" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-</div><!-- /.modal -->
+
 
 
 

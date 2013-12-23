@@ -88,14 +88,11 @@
 					 	<img src="/uploads/Facebook-Thumbs-Up.jpg" alt="facebook thumbs up"/> (<?php echo $count[$bookmark['bookmark_id']]['count'] ?>)
 					<?php endif; ?>
 					
-					<a data-toggle="modal" data-target="#myModalAddLink"  class="btn btn-default btn-xs" href="/network/addLink/<?=$bookmark['bookmark_id']?>" >Add Link</a>
+					<a class="btn btn-default btn-xs" href="/network/addLink/<?=$bookmark['bookmark_id']?>" >Add Link</a>
 				</div><!-- / .text-right -->
 			</div> <!-- / .feed-display -->
 		<?php endforeach;?>
 	</div> <!-- / .col-md-offset-2 .col-xs-12 .col-sm-10 .col-md-8 -->
 </div> <!-- / .row -->
 
-<!-- Modal Add Link
-=========================================== -->
-<div class="modal fade" id="myModalAddLink" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-</div><!-- /.modal -->
+

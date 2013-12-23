@@ -14,6 +14,13 @@ class network_controller extends base_controller {
 		
 	} # End of method
 	
+	public function index() {
+	
+		# Route to posts/add page
+		Router::redirect("/network/links");
+	
+	} # End of method
+	
 	public function links() {
 		
 		# Do the following, if search is set
@@ -117,7 +124,7 @@ class network_controller extends base_controller {
 	
 	} # End of method
 	
-	public function addLink($bookmark_id_add) {
+	public function addLink($bookmark_id_add = NULL) {
 		
 		# Set Query to get bookMarks for the logged In use
 		$q = "SELECT * FROM user_bookmarks
@@ -140,10 +147,45 @@ class network_controller extends base_controller {
 		
 	} # End of method
 	
-	public function profile($email) {
+	public function cancelAddLink() {
+	
+		# Send them back
+		Router::redirect("/network/links");
+	
+	} # End of method
+	
+	public function addLinkProfile($bookmark_id_add = NULL) {
+	
+		# Set Query to get bookMarks for the logged In use
+		$q = "SELECT a.url, b.email FROM user_bookmarks a, users b
+			WHERE a.user_id = b.user_id
+			AND bookmark_id = '".$bookmark_id_add."'
+			";
+	
+			# Run the command and store it as variable
+			$bookmark = DB::instance(DB_NAME)->select_rows($q );
+
+			# Set the view and variables
+			$this->template->content = View::instance('v_network_profileAddLink');
+			$this->template->title = "Add Link";
+			$this->template->content->bookmark = $bookmark;
+
+			# Render the template
+			echo $this->template;
+	
+	} # End of method
+		
+	public function cancelProfileAddLink($email = NULL) {
+	
+		# Send them back
+		Router::redirect("/network/profile/".$email);
+	
+	} # End of method
+	
+	public function profile($email = NULL) {
 		
 		# Set Query
-		$q= "SELECT first_name, last_name, email
+		$q= "SELECT user_id, first_name, last_name, email
 			From users
 			WHERE email = '".$email."'
 			";
