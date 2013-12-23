@@ -6,8 +6,8 @@ This is a bookmarking website.
 You can save, organize, and discover interesting links on the web. 
 User can save his favorite links to the website and check out other users links.
 User can add other user's links on his wall.
-User can create his network according to the taste of link. 
-I have provided a keyword search option to search your interest.<br/>
+User can create his network according to his interest. 
+A keyword search option has also been added to search links and users.<br/>
 
 
 Final Project Features:<br/>
