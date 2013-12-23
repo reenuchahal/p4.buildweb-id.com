@@ -5,6 +5,7 @@ $(document).ready(function() {
 	var form_password = $("#formPassword");
 	var form_login = $("#forgotPasswordLogin");
 	var form_addLink = $("#addLink");
+	var form_EditLink = $("#editLink");
 	var firstName = $("#firstName");
 	var lastName = $("#lastName");
 	var firstNameInfo = $("#firstNameInfo");
@@ -16,6 +17,9 @@ $(document).ready(function() {
 	var url = $("#url");
 	var title = $("#title");
 	var notes = $("#notes");
+	var urlEdit = $("#urlEdit");
+	var titleEdit = $("#titleEdit");
+	var notesEdit = $("#notesEdit");
 	var urlError = $(".urlError");
 	var titleError = $(".titleError");
 	var notesError = $(".notesError");
@@ -29,6 +33,9 @@ $(document).ready(function() {
 	url.keyup(validateURL);
 	title.keyup(validateTitle);
 	notes.keyup(validateNotes);
+	urlEdit.keyup(validateEditURL);
+	titleEdit.keyup(validateEditTitle);
+	notesEdit.keyup(validateEditNotes);
 	
 	//On Submitting
 	form.submit(function() {
@@ -57,6 +64,14 @@ $(document).ready(function() {
 	//On Submitting
 	form_addLink.submit(function() {
 		if(validateURL() & validateTitle() & validateNotes())
+			return true
+		else
+			return false;
+	});
+	
+	//On Submitting
+	form_EditLink.submit(function() {
+		if(validateEditURL() & validateEditTitle() & validateEditNotes())
 			return true
 		else
 			return false;
@@ -256,6 +271,90 @@ $(document).ready(function() {
 		//if it's valid	
 		} else {
 			notes.removeClass("error");
+			notesError.text(" ");
+			notesError.removeClass("error");
+			return true;
+		}
+	}
+	
+	// Validation of edit links 
+	// or add links from other users
+	
+	// URL validation function
+	function validateEditURL() {
+		
+		//if it's NOT valid
+		if($.trim(urlEdit.val()) == "" ) {
+			urlEdit.addClass("error");
+			urlError.text("No Blank Spaces.");
+			urlError.addClass("error");
+			return false;
+			
+		} else if  (urlEdit.val().length > 254) {
+			urlEdit.addClass("error");
+			urlError.text("Max 254 characters.");
+			urlError.addClass("error");
+			return false;
+			
+		} else if(!url_validate.test($.trim(urlEdit.val()))) {
+			urlEdit.addClass("error");
+			urlError.text("Invalid URL !!!");
+			urlError.addClass("error");
+			return false;
+		
+		//if it's valid	
+		} else {
+			urlEdit.removeClass("error");
+			urlError.text(" ");
+			urlError.removeClass("error");
+			return true;
+		}
+	}
+	
+	// Title validation function
+	function validateEditTitle() {
+		
+		//if it's NOT valid
+		if($.trim(titleEdit.val()) == "" ) {
+			titleEdit.addClass("error");
+			titleError.text("No Blank Spaces.");
+			titleError.addClass("error");
+			return false;
+			
+		} else if  (titleEdit.val().length > 254){
+			titleEdit.addClass("error");
+			titleError.text("Max 254 characters.");
+			titleError.addClass("error");
+			return false;
+		
+		//if it's valid
+		} else {
+			titleEdit.removeClass("error");
+			titleError.text(" ");
+			titleError.removeClass("error");
+			return true;
+		}
+	}
+	
+	// Notes validation function
+	function validateEditNotes() {
+		
+		//if it's NOT valid
+		if($.trim(notesEdit.val()) == "" ) {
+			notesEdit.addClass("error");
+			notesError.text("No Blank Spaces.");
+			notesError.addClass("error");
+			return false;
+			
+		} else if  (notesEdit.val().length > 1000) {
+			notesEdit.addClass("error");
+			notesError.text("Max 1000 characters.");
+			notesError.addClass("error");
+			return false;
+			
+		//if it's valid	
+		} else {
+			notesEdit.removeClass("error");
 			notesError.text(" ");
 			notesError.removeClass("error");
 			return true;

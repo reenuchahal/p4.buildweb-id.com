@@ -5,21 +5,21 @@
 			<h4>Edit BookMark</h4>
 		</div>
 		<div class="modal-body">
-			<form method="post" action="/bookmarks/p_edit/<?php if(isset ($bookmark[0]['bookmark_id'])): ?><?=$bookmark[0]['bookmark_id']?><?php endif;?>" id="addLink">
+			<form method="post" action="/bookmarks/p_edit/<?php if(isset ($bookmark[0]['bookmark_id'])): ?><?=$bookmark[0]['bookmark_id']?><?php endif;?>" id="editLink">
 			
 				<!-- URL input -->
-				<label for="url">URL</label>
-				<input class="form-control" size="50" value="<?php if(isset ($bookmark[0]['url'])): ?><?=$bookmark[0]['url']?><?php endif;?>" placeholder="url" id="url" type="text" name="url" required><br/>
+				<label for="urlEdit">URL</label>
+				<input class="form-control" size="50" value="<?php if(isset ($bookmark[0]['url'])): ?><?=$bookmark[0]['url']?><?php endif;?>" placeholder="url" id="urlEdit" type="text" name="url" required><br/>
 				<p class="urlError"></p>
 				
 				<!-- Title input -->
-				<label for="title">Title</label>
-				<input class="form-control" size="50" value="<?php if(isset ($bookmark[0]['title'])): ?><?=$bookmark[0]['title']?><?php endif;?>" placeholder="title" id="title" type="text" name="title" required><br/>
+				<label for="titleEdit">Title</label>
+				<input class="form-control" size="50" value="<?php if(isset ($bookmark[0]['title'])): ?><?=$bookmark[0]['title']?><?php endif;?>" placeholder="title" id="titleEdit" type="text" name="title" required><br/>
 				<p class="titleError"></p>
 				
 				<!-- Comment Textarea -->
-				<label for='notes'>Comment</label><br>
-				<textarea class="form-control" rows="3" name='notes' id='notes' placeholder="What's your comment?" required><?php if(isset ($bookmark[0]['notes'])): ?><?=$bookmark[0]['notes']?><?php endif;?></textarea><br/>
+				<label for='notesEdit'>Comment</label><br>
+				<textarea class="form-control" rows="3" name='notes' id='notesEdit' placeholder="What's your comment?" required><?php if(isset ($bookmark[0]['notes'])): ?><?=$bookmark[0]['notes']?><?php endif;?></textarea><br/>
 				<p class="notesError"></p>
 							 
 				<div class="text-right">
