@@ -2,7 +2,7 @@
 	<form  method="POST" action="/users/p_reset_password/" id="formPassword">
 		<div class="col-md-offset-1 col-xs-12 col-sm-6 col-md-6">
 			
-			<label for="yourPassword">Password</label>
+			<label for="yourPassword">Enter New Password</label>
 			<input class="form-control" placeholder="Password" id="yourPassword" type="password" name="password" required><br/>
 			<p id="yourPasswordInfo"></p>
 			
