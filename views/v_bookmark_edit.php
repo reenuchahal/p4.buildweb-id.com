@@ -1,7 +1,7 @@
 <div class="modal-dialog">
 	<div class="modal-content">
 		<div class="modal-header">
-		<a class="close" href="/bookmarks/cancelEdit/">&times;</a>
+			<a class="close" href="/bookmarks/cancelEdit/">&times;</a>
 			<h4>Edit BookMark</h4>
 		</div>
 		<div class="modal-body">
@@ -28,6 +28,6 @@
 				</div>
 			</form>
 		</div>
-	<div><!-- /.modal-content -->
+	</div><!-- /.modal-content -->
 </div><!-- /.modal-dialog -->
 
