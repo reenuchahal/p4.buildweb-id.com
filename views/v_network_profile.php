@@ -1,9 +1,9 @@
 <!-- No user has been defined
 ================================== -->
 <?php if(!isset($email)):?>
-<div class="feed-danger-display">
+	<div class="feed-danger-display">
 		<h4>No User has been defined.</h4>
-</div>
+	</div>
 <?php endif;?>
 
 <!-- Email does not exist
@@ -136,8 +136,5 @@
 	</div><!-- / .row -->	
 <?php endif; ?>
 
-<!-- Modal Add Link
- =========================================== -->
-<div class="modal fade" id="myModalAddLink" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-</div><!-- /.modal -->
+
 
