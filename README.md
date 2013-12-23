@@ -24,7 +24,10 @@ Final Project Features:<br/>
 10) Add, Edit and delete links.<br/>
 11) Like links option on my network page.<br/>
 12) Add other's link to my account option.<br/>
-13) Count of the links, count of the followers and count of the following.<br/>
+13) Count of the links, count of the followers and count of the following are displayed on "My Link page" and separate profile pages of users.<br/>
+14) Count of links changes, when we use search option. First it shows total number of links of user. 
+	But when user starts using search option, it starts showing no. of search result. 
+	It can be seen on 'My Link pages' and connection's 'profile pages'.
 
 Aspect managed by Javascript:<br/>
 1) All forms are validated using jquery.<br/>
