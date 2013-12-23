@@ -128,8 +128,8 @@ class network_controller extends base_controller {
 		
 		# Set Query to get bookMarks for the logged In use
 		$q = "SELECT * FROM user_bookmarks
-					WHERE bookmark_id = '".$bookmark_id_add."'
-					";
+			WHERE bookmark_id = '".$bookmark_id_add."'
+			";
 		
 		# Run the command and store it as variable
 		$bookmark = DB::instance(DB_NAME)->select_rows($q );
